@@ -17,15 +17,14 @@ class User extends BaseModel implements UserInterface, RemindableInterface {
 	 *
 	 * @var array
 	 */
-	protected $hidden = array('password');
+	protected $hidden = array( 'password' );
 
 	/**
 	 * Get the unique identifier for the user.
 	 *
 	 * @return mixed
 	 */
-	public function getAuthIdentifier()
-	{
+	public function getAuthIdentifier() {
 		return $this->getKey();
 	}
 
@@ -34,8 +33,7 @@ class User extends BaseModel implements UserInterface, RemindableInterface {
 	 *
 	 * @return string
 	 */
-	public function getAuthPassword()
-	{
+	public function getAuthPassword() {
 		return $this->password;
 	}
 
@@ -44,13 +42,11 @@ class User extends BaseModel implements UserInterface, RemindableInterface {
 	 *
 	 * @return string
 	 */
-	public function getReminderEmail()
-	{
+	public function getReminderEmail() {
 		return $this->email;
 	}
 
-	public function gifs()
-    {
-        return $this->belongsToMany('Giffy\Models\Gif')->withTimestamps()->orderBy('gif_user.id', 'DESC');
-    }
+	public function gifs() {
+		return $this->belongsToMany( 'Giffy\Models\Gif' )->withTimestamps()->orderBy( 'gif_user.id', 'DESC' );
+	}
 }

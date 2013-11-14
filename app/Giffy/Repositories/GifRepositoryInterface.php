@@ -12,36 +12,36 @@ interface GifRepositoryInterface {
 	/**
 	 * Paginate the gifs.
 	 *
-	 * @param int $per_page
+	 * @param int     $per_page
 	 *
 	 * @return array
 	 */
-	public function paginate($per_page);
+	public function paginate( $per_page );
 
 	/**
 	 * Paginate the users gifs.
 	 *
-	 * @param int $per_page
-	 * @param int $user_id
+	 * @param int     $per_page
+	 * @param int     $user_id
 	 *
 	 * @return array
 	 */
-	public function paginateUserGifs($per_page, $user_id);
-	
+	public function paginateUserGifs( $per_page, $user_id );
+
 	/**
 	 * Get a Gif by its id.
 	 *
-	 * @param  int   $gif_id
+	 * @param int     $id
 	 * @return Gif
 	 */
-	public function find($gif_id);
+	public function find( $id );
 
 	/**
-     * Create a new Gif.
-     *
-     * @param  string    $url
-     * @param  string    $thumb
-     * @return Gif
-     */
-    public function create($url, $thumb);
+	 * Create a new Gif.
+	 *
+	 * @param string  $url
+	 * @param string  $thumb
+	 * @return Gif
+	 */
+	public function create( $url, $thumb );
 }

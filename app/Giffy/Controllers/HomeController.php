@@ -16,19 +16,16 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
-	{
-		return View::make('hello');
+	public function showWelcome() {
+		return View::make( 'hello' );
 	}
 
-	public function showLogin()
-	{
+	public function showLogin() {
 		// show the form
-		return View::make('users.login');
+		return View::make( 'users.login' );
 	}
 
-	public function doLogin()
-	{
+	public function doLogin() {
 		// validate the info, create rules for the inputs
 		$rules = array(
 			'username'    => 'required',
@@ -36,39 +33,38 @@ class HomeController extends BaseController {
 		);
 
 		// run the validation rules on the inputs from the form
-		$validator = Validator::make(Input::all(), $rules);
+		$validator = Validator::make( Input::all(), $rules );
 
 		// if the validator fails, redirect back to the form
-		if ($validator->fails()) {
-			return Redirect::to('login')
-				->withErrors($validator) // send back all errors to the login form
-				->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+		if ( $validator->fails() ) {
+			return Redirect::to( 'login' )
+			->withErrors( $validator ) // send back all errors to the login form
+			->withInput( Input::except( 'password' ) ); // send back the input (not the password) so that we can repopulate the form
 		} else {
 
 			// create our user data for the authentication
 			$userdata = array(
-				'username' 	=> Input::get('username'),
-				'password' 	=> Input::get('password')
+				'username'  => Input::get( 'username' ),
+				'password'  => Input::get( 'password' )
 			);
 
 			// attempt to do the login
-			if (Auth::attempt($userdata)) {
-				return Redirect::to('/');
+			if ( Auth::attempt( $userdata ) ) {
+				return Redirect::to( '/' );
 
-			} else {	 	
+			} else {
 
-				// validation not successful, send back to form	
-				return Redirect::to('login');
+				// validation not successful, send back to form
+				return Redirect::to( 'login' );
 
 			}
 
 		}
 	}
 
-	public function doLogout()
-	{
+	public function doLogout() {
 		Auth::logout();
-		return Redirect::to('/');
+		return Redirect::to( '/' );
 	}
 
 }

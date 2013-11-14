@@ -17,8 +17,7 @@ class GiffyServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	public function boot()
-	{
+	public function boot() {
 		$this->bindRepositories();
 	}
 
@@ -27,21 +26,19 @@ class GiffyServiceProvider extends ServiceProvider {
 	 *
 	 * @return  void
 	 */
-	protected function bindRepositories()
-	{
-		$this->app->singleton('Giffy\Repositories\GifRepositoryInterface', 'Giffy\Repositories\DbGifRepository');
+	protected function bindRepositories() {
+		$this->app->singleton( 'Giffy\Repositories\GifRepositoryInterface', 'Giffy\Repositories\DbGifRepository' );
 
 	}
 
-	public function register(){}
+	public function register() {}
 
 	/**
 	 * Get the services provided by the provider.
 	 *
 	 * @return array
 	 */
-	public function provides()
-	{
+	public function provides() {
 		return array();
 	}
 
