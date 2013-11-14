@@ -24,20 +24,16 @@ Route::group(array('prefix' => 'gifs'), function() use ($giffyControllers)
 	Route::post('/create', array('uses' => $giffyControllers.'GifController@save'));
 });
 
-// route to show the login form
-Route::get('login', array('uses' => $giffyControllers.'HomeController@showLogin'));
-
-// route to process the form
-Route::post('login', array('uses' => $giffyControllers.'HomeController@doLogin'));
-
-Route::get('logout', array('uses' => $giffyControllers.'HomeController@doLogout'));
+Route::group(array('prefix' => 'user'), function() use ($giffyControllers)
+{
+	Route::get('/login', array('uses' => $giffyControllers.'UserController@login'));
+	Route::post('/login', array('uses' => $giffyControllers.'UserController@doLogin'));
+	Route::get('/logout', array('uses' => $giffyControllers.'UserController@logout'));
+});
 
 Route::get('/', array('uses' => $giffyControllers.'GifController@index'));
 
 /*
-Route::get('/', 'GifController@getIndex');
-Route::controller('gifs', 'GifController');
-
 Route::get('api/me', 'ApiUserController@getMe');
 Route::get('api/logout', 'ApiUserController@doLogout');
 Route::post('api/login', 'ApiUserController@postLogin');
@@ -45,11 +41,4 @@ Route::get('api/gifs/mine', 'ApiGifController@getMine');
 Route::get('api/gifs/{limit?}', 'ApiGifController@getIndex');
 Route::get('api/gifs/limit/{limit}', 'ApiGifController@getIndex');
 Route::get('api/gifs/limit/{limit}/offset/{offset}', 'ApiGifController@getIndex');
-
-// route to show the login form
-Route::get('login', array('uses' => 'HomeController@showLogin'));
-
-// route to process the form
-Route::post('login', array('uses' => 'HomeController@doLogin'));
-
-Route::get('logout', array('uses' => 'HomeController@doLogout'));*/
+*/

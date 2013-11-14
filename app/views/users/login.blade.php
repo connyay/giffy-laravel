@@ -15,7 +15,7 @@ Log In
                 <h3 class="panel-title">Login</h3>
             </div>
             <div class="panel-body">
-                {{ Form::open(array('url' => 'login')) }}
+                {{ Form::open(array('url' => 'user/login')) }}
                 <fieldset>
                     <div class="form-group">
                         <input class="form-control" placeholder="Username" name="username" type="text">

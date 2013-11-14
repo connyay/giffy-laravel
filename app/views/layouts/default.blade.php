@@ -55,9 +55,9 @@
 		@if (!Auth::guest())
 		<li class="navbar-text">Hi, {{ Auth::user()->username }}</li>
 		<li class="divider-vertical"></li>
-		<li><a href="{{ URL::to('logout') }}">Logout</a></li>
+		<li><a href="{{ URL::to('user/logout') }}">Logout</a></li>
 		@else
-		<li {{ (Request::is('login') ? 'class="active"' : '') }}><a href="{{ URL::to('login') }}">Login</a></li>
+		<li {{ (Request::is('user/login') ? 'class="active"' : '') }}><a href="{{ URL::to('user/login') }}">Login</a></li>
 		<li class="hidden" {{ (Request::is('users/register') ? 'class="active"' : '') }}><a href="{{ URL::to('users/register') }}">Register</a></li>
 		@endif
 
@@ -89,9 +89,9 @@
 		<li class="navbar-text">{{ Auth::user()->username }}</li>
 		<li class="divider-vertical"></li>
 		<li class="hidden" {{ (Request::is('users/show/' . Auth::user()->id) ? 'class="active"' : '') }}><a href="{{ URL::to('/users/show/'.Auth::user()->id) }}">Account</a></li>
-		<li><a href="{{ URL::to('logout') }}">Logout</a></li>
+		<li><a href="{{ URL::to('user/logout') }}">Logout</a></li>
 		@else
-		<li {{ (Request::is('login') ? 'class="active"' : '') }}><a href="{{ URL::to('login') }}">Login</a></li>
+		<li {{ (Request::is('user/login') ? 'class="active"' : '') }}><a href="{{ URL::to('user/login') }}">Login</a></li>
 		<li class="hidden" {{ (Request::is('users/register') ? 'class="active"' : '') }}><a href="{{ URL::to('users/register') }}">Register</a></li>
 		@endif
 		</ul>
