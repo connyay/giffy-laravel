@@ -14,9 +14,11 @@ class GifController extends BaseController {
     protected $gifs;
 
     /**
-     * Inject the models.
+     * Create a new Gif controller.
      *
-     * @param Confession $confession
+     * @param GifRepositoryInterface $gifs
+     *
+     * @return GifController
      */
     public function __construct( GifRepositoryInterface $gifs ) {
         $this->gifs = $gifs;

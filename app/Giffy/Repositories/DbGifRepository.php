@@ -1,6 +1,6 @@
 <?php namespace Giffy\Repositories;
 
-use Auth;
+use Auth, URL;
 use Giffy\Models\Gif;
 
 class DbGifRepository implements GifRepositoryInterface {
@@ -60,5 +60,19 @@ class DbGifRepository implements GifRepositoryInterface {
 	 */
 	public function create( $url, $thumb ) {
 		return Gif::create( compact( 'url', 'thumb' ) );
+	}
+
+	/**
+	 * Returns gifs for API.
+	 *
+	 * @param string  $limit
+	 * @param string  $offset
+	 * @return Gifs
+	 */
+	public function apiFetch( $limit, $offset ) {
+		return Gif::select( 'id', 'url', 'thumb' )
+		->orderBy( 'id', 'DESC' )
+		->offset( $offset )->limit( $limit )
+		->get();
 	}
 }

@@ -44,4 +44,13 @@ interface GifRepositoryInterface {
 	 * @return Gif
 	 */
 	public function create( $url, $thumb );
+
+	/**
+	 * Returns gifs for API.
+	 *
+	 * @param string  $limit
+	 * @param string  $offset
+	 * @return Gifs
+	 */
+	public function apiFetch( $limit, $offset );
 }
