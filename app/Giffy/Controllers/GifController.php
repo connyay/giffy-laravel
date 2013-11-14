@@ -43,10 +43,9 @@ class GifController extends BaseController {
                     continue;
                 }
                 $url = parse_url( $imageUrl );
-                $storagePath = public_path() . "/thumbs/";
                 $thumbPath = '/thumbs' . $url["path"];
 
-                Thumb::create( $imageUrl )->make( 'resize', array( 150, 150, 'adaptive' ) )->save( $storagePath );
+                Thumb::create( $imageUrl )->make( 'resize', array( 150, 150, 'adaptive' ) )->save( public_path() . "/thumbs/" );
                 $this->gifs->create( $imageUrl, $thumbPath );
                 $i++;
                 echo "\nAdded: " . $imageUrl ."\n";
@@ -64,7 +63,7 @@ class GifController extends BaseController {
     public function index() {
         $gifs = $this->gifs->paginate( 12 );
         // Show the page
-        return View::make( 'gifs.index', compact( 'gifs', 'userGifs' ) );
+        return View::make( 'gifs.index', compact( 'gifs' ) );
     }
 
     /**
@@ -134,6 +133,10 @@ class GifController extends BaseController {
         $imageUrl = str_replace( ".jpg", ".gif", $imageUrl );
         $url = parse_url( $imageUrl );
 
+        if ( !isset( $url["host"] ) || !isset( $url["path"] ) ) {
+            return Redirect::to( 'gifs/create' )->with( 'error', 'What the heck was that?' );
+        }
+
         if ( $url["host"] !== "i.imgur.com" ) {
             return Redirect::to( 'gifs/create' )->with( 'error', 'How about an i.imgur.com link?' );
         }
@@ -148,11 +151,7 @@ class GifController extends BaseController {
         $thumbPath = '/thumbs' . $fileName;
 
         Thumb::create( $imageUrl )->make( 'resize', array( 150, 150, 'adaptive' ) )->save( $storagePath );
-        $gif = new Gif;
-        $gif->url = $imageUrl;
-        $gif->thumb = $thumbPath;
-        if ( $gif->save() ) {
-            // Redirect to this confession page
+        if ( $this->gifs->create( $imageUrl, $thumbPath ) ) {
             return Redirect::to( 'gifs' )->with( 'success', 'Gif Saved!' );
         } else {
             return Redirect::to( 'gifs/create' )->with( 'error', 'Oops! There was a problem saving the gif.' );
