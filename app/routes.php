@@ -5,16 +5,16 @@ $giffyApiControllers = 'Giffy\Controllers\Api\\';
 
 Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) {
 		Route::get( '/', array( 'uses' => $giffyControllers.'GifController@index' ) );
-		Route::get( '/mine', array( 'uses' => $giffyControllers.'GifController@mine' ) );
-		Route::post( '/mine/{gif_id}', array( 'uses' => $giffyControllers.'GifController@addToMine' ) );
-		Route::delete( '/mine/{gif_id}', array( 'uses' => $giffyControllers.'GifController@removeFromMine' ) );
+		Route::get( '/mine', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@mine' ) );
+		Route::post( '/mine/{gif_id}', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@addToMine' ) );
+		Route::delete( '/mine/{gif_id}', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@removeFromMine' ) );
 		Route::get( '/create', array( 'uses' => $giffyControllers.'GifController@create' ) );
 		Route::get( '/show/{gif_id}', array( 'uses' => $giffyControllers.'GifController@show' ) );
 		Route::post( '/create', array( 'uses' => $giffyControllers.'GifController@save' ) );
 	} );
 
 Route::group( array( 'prefix' => 'user' ), function() use ( $giffyControllers ) {
-		Route::get( '/login', array( 'uses' => $giffyControllers.'UserController@login' ) );
+		Route::get( '/login', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@login' ) );
 		Route::post( '/login', array( 'uses' => $giffyControllers.'UserController@doLogin' ) );
 		Route::get( '/logout', array( 'uses' => $giffyControllers.'UserController@logout' ) );
 	} );

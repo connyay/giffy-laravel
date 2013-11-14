@@ -85,9 +85,6 @@ class GifController extends BaseController {
      * @return Response
      */
     public function mine( $id = null ) {
-        if ( Auth::guest() ) {
-            return Redirect::to( 'login' )->with( 'error', 'Oops! You have to login to do that' );
-        }
 
         if ( isset( $id ) ) {
             if ( !Auth::user()->gifs->contains( $id ) ) {
@@ -125,7 +122,6 @@ class GifController extends BaseController {
      * @return Response
      */
     public function create() {
-        // Show the register form
         return View::make( 'gifs.create' );
     }
     /**
