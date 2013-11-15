@@ -47,9 +47,10 @@ class ApiGifController extends ApiController {
             return $this->response( "message", "Pls login", 401 );
         }
 
-        $gifs = Auth::user()->gifs()->get();
+        $gifs = Auth::user()->gifs()->get(array('gifs.id', 'url', 'thumb'));
         foreach ( $gifs as $gif ) {
             $gif->thumb = URL::to( $gif->thumb );
+            unset($gif->pivot);
         }
         return $this->response( "gifs", $gifs->toArray(), 200 );
     }
