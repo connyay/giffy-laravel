@@ -1,5 +1,5 @@
 <?php namespace Giffy\Models;
-
+use Auth;
 class Gif extends BaseModel {
 
 	protected $fillable = array( 'url', 'thumb' );
@@ -9,6 +9,10 @@ class Gif extends BaseModel {
 	}
 
 	public function tags() {
-		return $this->belongsToMany( 'Giffy\Models\Tag' )->withPivot('user_id')->withTimestamps();
+		return $this->belongsToMany( 'Giffy\Models\Tag' )->withPivot( 'user_id' )->withTimestamps();
+	}
+
+	public function userTags() {
+		return $this->tags()->where( 'gif_tag.user_id', Auth::user()->id );
 	}
 }

@@ -28,6 +28,7 @@ Route::group( array( 'prefix' => 'api' ), function() use ( $giffyApiControllers 
 		Route::get( '/logout', $giffyApiControllers.'ApiUserController@logout' );
 		Route::post( '/login', $giffyApiControllers.'ApiUserController@login' );
 		Route::get( '/tags/all', $giffyApiControllers.'ApiTagController@all' );
+		Route::post( '/tags/sync', array( 'uses' => $giffyApiControllers.'ApiTagController@sync' ) );
 		Route::get( '/gifs/mine', $giffyApiControllers.'ApiGifController@mine' );
 		Route::get( '/gifs/{limit?}', $giffyApiControllers.'ApiGifController@fetch' );
 		Route::get( '/gifs/limit/{limit}', $giffyApiControllers.'ApiGifController@fetch' );

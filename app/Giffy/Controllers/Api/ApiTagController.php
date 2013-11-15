@@ -1,6 +1,6 @@
 <?php namespace Giffy\Controllers\Api;
 
-use Auth;
+use Auth, Input;
 use Giffy\Repositories\TagRepositoryInterface;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Response;
@@ -32,6 +32,23 @@ class ApiTagController extends ApiController {
      */
     public function all( ) {
         $tags = $this->tags->all( );
-        return Response::json( $tags->lists("name") );
+        return Response::json( $tags->lists( "name" ) );
+    }
+
+    /**
+     * Display a listing of all the tags.
+     *
+     * @return Response
+     */
+    public function sync( ) {
+        $gif_id = Input::get( "gif_id" );
+        $tags = Input::get( "tags" );
+        $message = "Failed Sync";
+        $status = 500;
+        if ( $this->tags->syncGifTags( $gif_id, $tags ) ) {
+            $message = "Successful Sync";
+            $status = 200;
+        }
+        return $this->response( "message", $message, $status );
     }
 }
