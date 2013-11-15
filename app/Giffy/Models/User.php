@@ -49,4 +49,10 @@ class User extends BaseModel implements UserInterface, RemindableInterface {
 	public function gifs() {
 		return $this->belongsToMany( 'Giffy\Models\Gif' )->withTimestamps()->orderBy( 'gif_user.id', 'DESC' );
 	}
+
+	public function tags() {
+		return $this->belongsToMany( 'Giffy\Models\Tag', 'gif_tag' )->withTimestamps()
+		->where( 'gif_tag.user_id', $this->id )
+		->distinct();
+	}
 }

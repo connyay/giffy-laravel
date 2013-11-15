@@ -8,7 +8,9 @@ All Gifs
 
 {{-- Content --}}
 @section('content')
-
+@if (!Auth::guest()) 
+@include('gifs.tags')
+@endif
 <div id="images" class="row">
 		@foreach ($gifs as $gif)
 

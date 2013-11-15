@@ -2,6 +2,7 @@
 
 use Auth, URL;
 use Giffy\Models\Gif;
+use Giffy\Models\Tag;
 
 class DbGifRepository implements GifRepositoryInterface {
 
@@ -49,6 +50,17 @@ class DbGifRepository implements GifRepositoryInterface {
 	 */
 	public function find( $id ) {
 		return Gif::find( $id );
+	}
+
+	/**
+	 * Get Gifs that match provided tag
+	 *
+	 * @param String     $tag
+	 * @return array
+	 */
+	public function tagged( $tag ) {
+		$tag = Tag::where("name", $tag)->first();
+		return $tag->gifs()->paginate( 12 );
 	}
 
 	/**

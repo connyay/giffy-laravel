@@ -98,6 +98,17 @@ class GifController extends BaseController {
         return View::make( 'gifs.mine', compact( 'gifs' ) );
     }
 
+    /**
+     * Display a listing of all the gifs.
+     *
+     * @return Response
+     */
+    public function tagged($tag) {
+        $gifs = $this->gifs->tagged($tag);
+        // Show the page
+        return View::make( 'gifs.index', compact( 'gifs' ) );
+    }
+
     public function addToMine( $id ) {
         if ( !Auth::user()->gifs->contains( $id ) ) {
             Auth::user()->gifs()->attach( $id );

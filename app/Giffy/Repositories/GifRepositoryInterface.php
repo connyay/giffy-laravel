@@ -37,6 +37,14 @@ interface GifRepositoryInterface {
 	public function find( $id );
 
 	/**
+	 * Get Gifs that match provided tag
+	 *
+	 * @param String     $tag
+	 * @return array
+	 */
+	public function tagged( $tag );
+
+	/**
 	 * Create a new Gif.
 	 *
 	 * @param string  $url
