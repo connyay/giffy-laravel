@@ -20,6 +20,11 @@ class DbTagRepository implements TagRepositoryInterface {
 	 * @return Tag
 	 */
 	public function create( $name ) {
-		return Tag::create( compact( 'name' ) );
+		$name = ucfirst(strtolower($name));
+		try {
+			return Tag::create( compact( 'name' ) );
+		} catch (\Exception $e) {
+			return Tag::where("name", "=", $name)->first();
+		}
 	}
 }

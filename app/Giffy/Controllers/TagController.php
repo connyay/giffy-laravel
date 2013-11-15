@@ -1,5 +1,6 @@
 <?php namespace Giffy\Controllers;
 
+use Input;
 use Giffy\Repositories\TagRepositoryInterface;
 
 class TagController extends BaseController {
