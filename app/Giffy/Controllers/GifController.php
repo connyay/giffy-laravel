@@ -23,7 +23,7 @@ class GifController extends BaseController {
     public function __construct( GifRepositoryInterface $gifs ) {
         $this->gifs = $gifs;
     }
-
+    
     /**
      * Seed with the top 100 reaction gifs
      *

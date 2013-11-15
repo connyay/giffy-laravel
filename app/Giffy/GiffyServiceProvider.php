@@ -28,6 +28,7 @@ class GiffyServiceProvider extends ServiceProvider {
 	 */
 	protected function bindRepositories() {
 		$this->app->singleton( 'Giffy\Repositories\GifRepositoryInterface', 'Giffy\Repositories\DbGifRepository' );
+		$this->app->singleton( 'Giffy\Repositories\TagRepositoryInterface', 'Giffy\Repositories\DbTagRepository' );
 
 	}
 

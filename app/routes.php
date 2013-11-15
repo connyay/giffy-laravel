@@ -13,6 +13,10 @@ Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) 
 		Route::post( '/create', array( 'uses' => $giffyControllers.'GifController@save' ) );
 	} );
 
+Route::group( array( 'prefix' => 'tags' ), function() use ( $giffyControllers ) {
+		Route::post( '/save', array( 'uses' => $giffyControllers.'TagController@save' ) );
+	} );
+
 Route::group( array( 'prefix' => 'user' ), function() use ( $giffyControllers ) {
 		Route::get( '/login', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@login' ) );
 		Route::post( '/login', array( 'uses' => $giffyControllers.'UserController@doLogin' ) );
