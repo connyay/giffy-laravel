@@ -1,6 +1,6 @@
 <?php namespace Giffy\Controllers\Api;
 
-use Auth;
+use Auth, Input;
 use Giffy\Models\User;
 class ApiUserController extends ApiController {
 
