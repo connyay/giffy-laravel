@@ -15,7 +15,7 @@ All Gifs
 @if(sizeof($gifs) > 0)
 		@foreach ($gifs as $gif)
 
-		<div class="col-sm-12 col-xs-12 col-md-4 col-lg-4">
+		<div class="col-sm-6 col-xs-12 col-md-3 col-lg-3 giffy-thumb">
 			<div class="thumbnail well">
 				<img class="giffy-thumb" src="{{{URL::to($gif->thumb)}}}" data-thumb-src="{{{URL::to($gif->thumb)}}}" data-full-src="{{{$gif->url}}}" />
 				<div class="caption">
