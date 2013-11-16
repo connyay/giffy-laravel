@@ -1,4 +1,5 @@
 #Ignore:
+/app/config/database.php
 /bootstrap/compiled.php
 /vendor
 /public/thumbs
