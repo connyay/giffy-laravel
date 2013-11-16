@@ -36,11 +36,27 @@ class ApiTagController extends ApiController {
     }
 
     /**
-     * Display a listing of all the tags.
+     * Display a listing of all the user tags.
+     *
+     * @return Response
+     */
+    public function mine( ) {
+        $authorized = $this->authorize();
+        if ( !$authorized["is"] ) { return $authorized["message"]; }
+
+        $tags = $this->tags->mine( );
+        return Response::json( $tags->lists( "name" ) );
+    }
+
+    /**
+     * Syncs the gif tags.
      *
      * @return Response
      */
     public function sync( ) {
+        $authorized = $this->authorize();
+        if ( !$authorized["is"] ) { return $authorized["message"]; }
+
         $gif_id = Input::get( "gif_id" );
         $tags = Input::get( "tags" );
         $message = "Failed Sync";

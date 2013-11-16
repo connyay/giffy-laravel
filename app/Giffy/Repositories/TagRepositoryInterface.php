@@ -10,6 +10,13 @@ interface TagRepositoryInterface {
 	public function all();
 
 	/**
+	 * Get all of the users tags.
+	 *
+	 * @return array
+	 */
+	public function mine();
+
+	/**
 	 * Create a new Tag.
 	 *
 	 * @param string  $name

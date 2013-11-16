@@ -13,7 +13,17 @@ class DbTagRepository implements TagRepositoryInterface {
 	 */
 	public function all() {
 		$user_id = Auth::user()->id;
-		return Tag::orderBy( 'id', 'DESC' )->where('user_id', $user_id)->get();
+		return Tag::orderBy( 'id', 'DESC' )->get();
+	}
+
+	/**
+	 * Get all of the users tags.
+	 *
+	 * @return array
+	 */
+	public function mine() {
+		$user_id = Auth::user()->id;
+		return Tag::orderBy( 'id', 'DESC' )->where( 'user_id', $user_id )->get();
 	}
 
 	/**

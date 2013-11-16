@@ -43,14 +43,13 @@ class ApiGifController extends ApiController {
      * @return Response
      */
     public function mine() {
-        if ( Auth::guest() ) {
-            return $this->response( "message", "Pls login", 401 );
-        }
+        $authorized = $this->authorize();
+        if ( !$authorized["is"] ) { return $authorized["message"]; }
 
-        $gifs = Auth::user()->gifs()->get(array('gifs.id', 'url', 'thumb'));
+        $gifs = Auth::user()->gifs()->get( array( 'gifs.id', 'url', 'thumb' ) );
         foreach ( $gifs as $gif ) {
             $gif->thumb = URL::to( $gif->thumb );
-            unset($gif->pivot);
+            unset( $gif->pivot );
         }
         return $this->response( "gifs", $gifs->toArray(), 200 );
     }

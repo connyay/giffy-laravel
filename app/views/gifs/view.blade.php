@@ -33,7 +33,7 @@ $tags.tagsinput({
 	typeahead: {
 		source: function (query) {
 			if (!tagJson) {
-				tagJson = $.getJSON("{{ URL::to('api/tags/all') }}");
+				tagJson = $.getJSON("{{ URL::to('api/tags/mine') }}");
 			}
 			return tagJson;
 		}
@@ -45,7 +45,7 @@ var initCount = $tags.tagsinput('items').length,
 	saveTags = function () {
 		var data = {
 			"gif_id": "{{ $gif->id }}",
-			"tags": $tags.tagsinput('items').toString()
+			"tags": $tags.val()
 		};
 		$.ajax({
 			url: "{{ URL::to('api/tags/sync') }}",
