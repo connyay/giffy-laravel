@@ -104,9 +104,7 @@
 
 		<!-- Container -->
 		<div class="container">
-		<!-- Notifications -->
-		@include('notifications')
-		<!-- ./ notifications -->
+		
 
 		<!-- Content -->
 		@yield('content')
@@ -120,6 +118,10 @@
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 		<script src="{{ asset('js/restfulizer.js') }}"></script> <!-- Thanks to Zizaco for this script:  http://zizaco.net  -->
+		<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
 		@yield('scripts')
+		<!-- Notifications -->
+		@include('notifications')
+		<!-- ./ notifications -->
 		</body>
 		</html>
