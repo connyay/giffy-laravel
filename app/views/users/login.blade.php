@@ -18,7 +18,7 @@ Log In
                 {{ Form::open(array('url' => 'user/login')) }}
                 <fieldset>
                     <div class="form-group">
-                        <input class="form-control" placeholder="Username" name="username" type="text">
+                        <input class="form-control" placeholder="Username" name="username" type="text" value="{{ Request::old('username') }}">
                     </div>
                     <div class="form-group">
                         <input class="form-control" placeholder="Password" name="password" type="password" value="">
