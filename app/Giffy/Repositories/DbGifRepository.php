@@ -1,6 +1,6 @@
 <?php namespace Giffy\Repositories;
 
-use Auth, URL;
+use Auth, URL, Thumb;
 use Giffy\Models\Gif;
 use Giffy\Models\Tag;
 
@@ -39,7 +39,6 @@ class DbGifRepository implements GifRepositoryInterface {
 		$per_page = is_numeric( $per_page ) ? $per_page : 12;
 
 		return Auth::user()->gifs()->paginate( $per_page );
-
 	}
 
 	/**
@@ -67,10 +66,10 @@ class DbGifRepository implements GifRepositoryInterface {
 	 * Create a new Gif.
 	 *
 	 * @param string  $url
-	 * @param string  $thumb
 	 * @return Post
 	 */
-	public function create( $url, $thumb ) {
+	public function create( $url ) {
+		$thumb = $this->buildThumb( $url );
 		return Gif::create( compact( 'url', 'thumb' ) );
 	}
 
@@ -86,5 +85,20 @@ class DbGifRepository implements GifRepositoryInterface {
 		->orderBy( 'id', 'DESC' )
 		->skip( $offset )->take( $limit )
 		->get();
+	}
+
+	/**
+	 * Builds thumbnail from url
+	 *
+	 * @param string  $url
+	 * @return string
+	 */
+	private function buildThumb( $url ) {
+		$imageUrl = str_replace( ".jpg", ".gif", $url );
+		$url = parse_url( $url );
+		$fileName = $url["path"];
+		$thumbPath = '/thumbs' . $fileName;
+		Thumb::create( $imageUrl )->make( 'resize', array( 150, 150, 'adaptive' ) )->save( public_path() . "/thumbs/" );
+		return $thumbPath;
 	}
 }

@@ -48,10 +48,9 @@ interface GifRepositoryInterface {
 	 * Create a new Gif.
 	 *
 	 * @param string  $url
-	 * @param string  $thumb
 	 * @return Gif
 	 */
-	public function create( $url, $thumb );
+	public function create( $url );
 
 	/**
 	 * Returns gifs for API.

@@ -23,7 +23,7 @@ class GifController extends BaseController {
     public function __construct( GifRepositoryInterface $gifs ) {
         $this->gifs = $gifs;
     }
-    
+
     /**
      * Seed with the top 100 reaction gifs
      *
@@ -42,11 +42,8 @@ class GifController extends BaseController {
                     echo "\nWe already have " . $imageUrl . " saved.\n";
                     continue;
                 }
-                $url = parse_url( $imageUrl );
-                $thumbPath = '/thumbs' . $url["path"];
 
-                Thumb::create( $imageUrl )->make( 'resize', array( 150, 150, 'adaptive' ) )->save( public_path() . "/thumbs/" );
-                $this->gifs->create( $imageUrl, $thumbPath );
+                $this->gifs->create( $imageUrl );
                 $i++;
                 echo "\nAdded: " . $imageUrl ."\n";
             }
@@ -103,8 +100,8 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function tagged($tag) {
-        $gifs = $this->gifs->tagged($tag);
+    public function tagged( $tag ) {
+        $gifs = $this->gifs->tagged( $tag );
         // Show the page
         return View::make( 'gifs.index', compact( 'gifs' ) );
     }
@@ -125,7 +122,6 @@ class GifController extends BaseController {
         return Redirect::back()->with( 'warning', 'You didn\'t have that one... wat.' );
     }
 
-
     /**
      * Create
      *
@@ -134,6 +130,7 @@ class GifController extends BaseController {
     public function create() {
         return View::make( 'gifs.create' );
     }
+    
     /**
      * Create
      *
@@ -157,12 +154,7 @@ class GifController extends BaseController {
             return Redirect::to( 'gifs/create' )->with( 'error', 'We already have that gif.' );
         }
 
-        $fileName = $url["path"];
-        $storagePath = public_path() . "/thumbs/";
-        $thumbPath = '/thumbs' . $fileName;
-
-        Thumb::create( $imageUrl )->make( 'resize', array( 150, 150, 'adaptive' ) )->save( $storagePath );
-        if ( $this->gifs->create( $imageUrl, $thumbPath ) ) {
+        if ( $this->gifs->create( $imageUrl ) ) {
             return Redirect::to( 'gifs' )->with( 'success', 'Gif Saved!' );
         } else {
             return Redirect::to( 'gifs/create' )->with( 'error', 'Oops! There was a problem saving the gif.' );
