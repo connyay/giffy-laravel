@@ -2,7 +2,7 @@
 /app/config/database.php
 /bootstrap/compiled.php
 /vendor
-/public/thumbs
+/public/thumbs/*
 composer.phar
 composer.lock
 /app/config/sendGridConfig.php
