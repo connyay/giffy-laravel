@@ -13,9 +13,10 @@ class CreateGifTagTable extends Migration {
 	public function up() {
 		Schema::create( 'gif_tag', function( Blueprint $table ) {
 				$table->increments( 'id' );
+				
 				$table->integer( 'gif_id' );
 				$table->integer( 'tag_id' );
-				$table->integer( 'user_id' );
+				
 				$table->timestamps();
 			} );
 	}
