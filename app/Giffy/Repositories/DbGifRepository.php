@@ -84,7 +84,7 @@ class DbGifRepository implements GifRepositoryInterface {
 	public function apiFetch( $limit, $offset ) {
 		return Gif::select( 'id', 'url', 'thumb' )
 		->orderBy( 'id', 'DESC' )
-		->offset( $offset )->limit( $limit )
+		->skip( $offset )->take( $limit )
 		->get();
 	}
 }
