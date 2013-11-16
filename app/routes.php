@@ -12,6 +12,7 @@ Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) 
 		Route::get( '/show/{gif_id}', array( 'uses' => $giffyControllers.'GifController@show' ) );
 		Route::post( '/create', array( 'uses' => $giffyControllers.'GifController@save' ) );
 		Route::get( '/tag/{tag}', array( 'uses' => $giffyControllers.'GifController@tagged' ) );
+		Route::get( '/seed', array( 'uses' => $giffyControllers.'GifController@seed' ) );
 	} );
 
 Route::group( array( 'prefix' => 'tags' ), function() use ( $giffyControllers ) {

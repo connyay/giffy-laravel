@@ -95,6 +95,8 @@ class DbGifRepository implements GifRepositoryInterface {
 	 */
 	private function buildThumb( $url ) {
 		$imageUrl = str_replace( ".jpg", ".gif", $url );
+		$imageUrl = explode( "?", $imageUrl );
+		$imageUrl = $imageUrl[0];
 		$url = parse_url( $url );
 		$fileName = $url["path"];
 		$thumbPath = '/thumbs' . $fileName;

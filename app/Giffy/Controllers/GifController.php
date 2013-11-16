@@ -29,15 +29,15 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function getSeed() {
-        $array = (array) json_decode( file_get_contents( "http://www.reddit.com/r/reactiongifs/top/.json?sort=top&t=day&limit=100" ), true );
+    public function seed() {
+        $array = (array) json_decode( file_get_contents( "http://www.reddit.com/r/reactiongifs/top/.json?sort=top&t=day&limit=50" ), true );
         $i = 0;
         foreach ( $array["data"]["children"] as $child ) {
             $data = $child["data"];
 
             if ( $data["domain"] === "i.imgur.com" ) {
                 $imageUrl = $data["url"];
-                $exists = Gif::where( "url", "=", $imageUrl )->first();
+                $exists = Gif::where( "url", $imageUrl )->first();
                 if ( !is_null( $exists ) ) {
                     echo "\nWe already have " . $imageUrl . " saved.\n";
                     continue;
@@ -47,7 +47,7 @@ class GifController extends BaseController {
                 $i++;
                 echo "\nAdded: " . $imageUrl ."\n";
             }
-            sleep( 2 );
+            sleep( 1 );
         }
         echo "all done? added: " . $i . " images";
     }
@@ -130,7 +130,7 @@ class GifController extends BaseController {
     public function create() {
         return View::make( 'gifs.create' );
     }
-    
+
     /**
      * Create
      *
