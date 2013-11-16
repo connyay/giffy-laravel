@@ -39,7 +39,7 @@ interface GifRepositoryInterface {
 	/**
 	 * Get Gifs that match provided tag
 	 *
-	 * @param String     $tag
+	 * @param String  $tag
 	 * @return array
 	 */
 	public function tagged( $tag );

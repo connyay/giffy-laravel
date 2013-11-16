@@ -12,7 +12,8 @@ class DbTagRepository implements TagRepositoryInterface {
 	 * @return array
 	 */
 	public function all() {
-		return Tag::orderBy( 'id', 'DESC' )->get();
+		$user_id = Auth::user()->id;
+		return Tag::orderBy( 'id', 'DESC' )->where('user_id', $user_id)->get();
 	}
 
 	/**
@@ -23,8 +24,9 @@ class DbTagRepository implements TagRepositoryInterface {
 	 */
 	public function create( $name ) {
 		$name = strtolower( $name );
+		$user_id = Auth::user()->id;
 		try {
-			return Tag::create( compact( 'name' ) );
+			return Tag::create( compact( 'name', 'user_id' ) );
 		} catch ( \Exception $e ) {
 			return Tag::where( "name", "=", $name )->first();
 		}
@@ -41,7 +43,7 @@ class DbTagRepository implements TagRepositoryInterface {
 		// This seems really slow... But Couldn't use detach / sync because of the user_id...
 		// *groan*
 		$gif = Gif::find( $gif_id );
-		foreach ( $gif->userTags as $tag ) {
+		foreach ( $gif->userTags()->get() as $tag ) {
 			$tag->pivot->delete();
 		}
 		if ( strlen( $tags ) === 0 ) {
@@ -49,11 +51,10 @@ class DbTagRepository implements TagRepositoryInterface {
 			return true;
 		}
 		$tags = explode( ",", $tags );
-		$user_id = Auth::user()->id;
 		$tagIDs = [];
 		foreach ( $tags as $tag ) {
 			$newTag = $this->create( $tag );
-			$tagIDs[$newTag->id] = array( "user_id"=>$user_id );
+			$tagIDs[] = $newTag->id;
 		}
 		$gif->tags()->attach( $tagIDs );
 		return true;

@@ -51,8 +51,6 @@ class User extends BaseModel implements UserInterface, RemindableInterface {
 	}
 
 	public function tags() {
-		return $this->belongsToMany( 'Giffy\Models\Tag', 'gif_tag' )->withTimestamps()
-		->where( 'gif_tag.user_id', $this->id )
-		->distinct();
+		return $this->hasMany( 'Giffy\Models\Tag' );
 	}
 }

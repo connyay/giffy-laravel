@@ -55,11 +55,11 @@ class DbGifRepository implements GifRepositoryInterface {
 	/**
 	 * Get Gifs that match provided tag
 	 *
-	 * @param String     $tag
+	 * @param String  $tag
 	 * @return array
 	 */
 	public function tagged( $tag ) {
-		$tag = Tag::where("name", $tag)->first();
+		$tag = Tag::where( "name", $tag )->first();
 		return $tag->gifs()->paginate( 12 );
 	}
 

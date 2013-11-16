@@ -15,12 +15,12 @@ interface TagRepositoryInterface {
 	 * @param string  $name
 	 * @return Tag
 	 */
-	public function create( $url );
+	public function create( $name );
 
 	/**
 	 * Syncs the gif and tag relationships
 	 *
-	 * @param int  $gif_id
+	 * @param int     $gif_id
 	 * @param string  $tags
 	 * @return JSON
 	 */
