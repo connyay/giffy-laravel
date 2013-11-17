@@ -26,8 +26,8 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'dev' => array('giffy.localhost'),
-	'production' => array('giffy.co'),
+	'dev' => array('giffy.localhost', 'api.giffy.localhost'),
+	'production' => array('giffy.co', 'api.giffy.co'),
 
 ));
 

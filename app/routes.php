@@ -3,6 +3,24 @@
 $giffyControllers = 'Giffy\Controllers\\';
 $giffyApiControllers = 'Giffy\Controllers\Api\\';
 
+$domain = ( App::environment() == 'production' ) ? 'giffy.co' : 'giffy.localhost';
+
+
+Route::group( array( 'domain' => 'api.' . $domain ), function() use ( $giffyApiControllers ) {
+		Route::get( '/me', $giffyApiControllers.'ApiUserController@me' );
+		Route::get( '/logout', $giffyApiControllers.'ApiUserController@logout' );
+		Route::post( '/login', $giffyApiControllers.'ApiUserController@login' );
+		Route::get( '/tags/mine', $giffyApiControllers.'ApiTagController@mine' );
+		Route::post( '/tags/sync', array( 'uses' => $giffyApiControllers.'ApiTagController@sync' ) );
+		Route::get( '/gifs/mine', $giffyApiControllers.'ApiGifController@mine' );
+		Route::get( '/gifs/{limit?}', $giffyApiControllers.'ApiGifController@fetch' );
+		Route::get( '/gifs/limit/{limit}', $giffyApiControllers.'ApiGifController@fetch' );
+		Route::get( '/gifs/limit/{limit}/offset/{offset}', $giffyApiControllers.'ApiGifController@fetch' );
+		Route::get( '/', function() {
+				return View::make( 'api.doc', array( 'route' => 'api.giffy.co/' ) );
+			} );
+	} );
+
 Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) {
 		Route::get( '/', array( 'uses' => $giffyControllers.'GifController@index' ) );
 		Route::post( '/', array( 'uses' => $giffyControllers.'GifController@store' ) );
@@ -23,22 +41,6 @@ Route::group( array( 'prefix' => 'user' ), function() use ( $giffyControllers ) 
 		Route::get( '/login', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@login' ) );
 		Route::post( '/login', array( 'uses' => $giffyControllers.'UserController@doLogin' ) );
 		Route::get( '/logout', array( 'uses' => $giffyControllers.'UserController@logout' ) );
-	} );
-
-Route::group( array( 'prefix' => 'api' ), function() use ( $giffyApiControllers ) {
-		Route::get( '/me', $giffyApiControllers.'ApiUserController@me' );
-		Route::get( '/logout', $giffyApiControllers.'ApiUserController@logout' );
-		Route::post( '/login', $giffyApiControllers.'ApiUserController@login' );
-		Route::get( '/tags/mine', $giffyApiControllers.'ApiTagController@mine' );
-		Route::post( '/tags/sync', array( 'uses' => $giffyApiControllers.'ApiTagController@sync' ) );
-		Route::get( '/gifs/mine', $giffyApiControllers.'ApiGifController@mine' );
-		Route::get( '/gifs/{limit?}', $giffyApiControllers.'ApiGifController@fetch' );
-		Route::get( '/gifs/limit/{limit}', $giffyApiControllers.'ApiGifController@fetch' );
-		Route::get( '/gifs/limit/{limit}/offset/{offset}', $giffyApiControllers.'ApiGifController@fetch' );
-
-		Route::get( '/', function() {
-				return View::make( 'api.doc', array('route' => 'giffy.co/api/'));
-			} );
 	} );
 
 
