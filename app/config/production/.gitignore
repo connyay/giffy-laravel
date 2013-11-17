@@ -1,4 +1,4 @@
 *
 !.gitignore
-app.php.example
-database.php.example
+!app.php.example
+!database.php.example
