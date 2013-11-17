@@ -1,8 +1,9 @@
 <ol class="giffy-tag-cloud">
 	<li>Tags:</li>
-	@foreach(Auth::user()->tags()->lists("name") as $tag)
-	<li><a href="{{ URL::to('gifs/tag', array('tag'=>$tag)) }}">
-		<span class="label {{ (Request::is('gifs/tag/'.$tag) ? 'label-primary' : 'label-info') }}">{{{ $tag }}}</span>
+	@foreach(Auth::user()->tags()->has('gifs')->get() as $tag)
+	<li><a href="{{ URL::to('gifs/tag', array('tag'=>$tag->name)) }}">
+		
+		<span class="label {{ (Request::is('gifs/tag/'.$tag) ? 'label-primary' : 'label-info') }}">{{{ $tag->name }}}</span>
 	</a></li>
 	@endforeach
 </ol>
