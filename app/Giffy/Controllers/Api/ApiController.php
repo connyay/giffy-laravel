@@ -10,7 +10,13 @@ class ApiController extends \Giffy\Controllers\BaseController {
     protected function response( $dataKey, $data, $status ) {
         switch ( $this->content_type ) {
         case 'application/json':
-            return Response::json( array( "status"=>$status, $dataKey=>$data ) );
+            $responseArray = [];
+            $responseArray["status"] = $status;
+            if ( is_array( $data ) ) {
+                $responseArray["count"] = count( $data );
+            }
+            $responseArray[$dataKey] = $data;
+            return Response::json( $responseArray  );
             break;
 
         case 'application/xml':
