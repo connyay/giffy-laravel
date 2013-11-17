@@ -18,9 +18,9 @@ New Gif
                 {{ Form::open(array('url' => 'gifs/create')) }}
                 <fieldset>
                     <div class="form-group">
-                        <input class="form-control" placeholder="i.imgur link" name="url" type="text" value="{{ Request::old('url') }}">
+                        {{ Form::text('url', Input::old('url'), array('class' => 'form-control', 'placeholder' => 'i.imgur link')) }}
                     </div>
-                    <input class="btn btn-lg btn-success btn-block" type="submit" value="Save">
+                    {{ Form::submit('Save', array('class' => 'btn btn-lg btn-success btn-block')) }}
                 </fieldset>
                 {{ Form::close() }}
             </div>

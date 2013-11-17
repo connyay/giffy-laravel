@@ -35,7 +35,6 @@ class UserController extends BaseController {
 				return Redirect::to( '/' );
 
 			} else {
-
 				// validation not successful, send back to form
 				return Redirect::to( 'user/login' )
 				->withInput( Input::except( 'password' ) );;

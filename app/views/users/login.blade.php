@@ -18,12 +18,12 @@ Log In
                 {{ Form::open(array('url' => 'user/login')) }}
                 <fieldset>
                     <div class="form-group">
-                        <input class="form-control" placeholder="Username" name="username" type="text" value="{{ Request::old('username') }}">
+                        {{ Form::text('username', Input::old('username'), array('class' => 'form-control', 'placeholder' => 'Username')) }}
                     </div>
                     <div class="form-group">
-                        <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                        {{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password')) }}
                     </div>
-                    <input class="btn btn-lg btn-success btn-block" type="submit" value="Login">
+                    {{ Form::submit('Login', array('class' => 'btn btn-lg btn-success btn-block')) }}
                 </fieldset>
                 {{ Form::close() }}
             </div>

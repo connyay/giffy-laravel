@@ -142,22 +142,22 @@ class GifController extends BaseController {
         $url = parse_url( $imageUrl );
 
         if ( !isset( $url["host"] ) || !isset( $url["path"] ) ) {
-            return Redirect::to( 'gifs/create' )->with( 'error', 'What the heck was that?' );
+            return Redirect::to( 'gifs/create' )->with( 'error', 'What the heck was that?' )->withInput();
         }
 
         if ( $url["host"] !== "i.imgur.com" ) {
-            return Redirect::to( 'gifs/create' )->with( 'error', 'How about an i.imgur.com link?' );
+            return Redirect::to( 'gifs/create' )->with( 'error', 'How about an i.imgur.com link?' )->withInput();
         }
 
         $exists = Gif::where( "url", "=", $imageUrl )->first();
         if ( !is_null( $exists ) ) {
-            return Redirect::to( 'gifs/create' )->with( 'error', 'We already have that gif.' );
+            return Redirect::to( 'gifs/create' )->with( 'error', 'We already have that gif.' )->withInput();
         }
 
         if ( $this->gifs->create( $imageUrl ) ) {
             return Redirect::to( 'gifs' )->with( 'success', 'Gif Saved!' );
         } else {
-            return Redirect::to( 'gifs/create' )->with( 'error', 'Oops! There was a problem saving the gif.' );
+            return Redirect::to( 'gifs/create' )->with( 'error', 'Oops! There was a problem saving the gif.' )->withInput();
         }
     }
 }
