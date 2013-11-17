@@ -10,7 +10,7 @@ Route::group( array( 'domain' => 'api.' . $domain ), function() use ( $giffyApiC
 		Route::get( '/me', $giffyApiControllers.'ApiUserController@me' );
 		Route::get( '/logout', $giffyApiControllers.'ApiUserController@logout' );
 		Route::post( '/login', $giffyApiControllers.'ApiUserController@login' );
-		Route::get( '/tags/mine', $giffyApiControllers.'ApiTagController@mine' );
+		Route::get( '/tags/mine', array(  'uses' => $giffyApiControllers.'ApiTagController@mine' ) );
 		Route::post( '/tags/sync', array( 'uses' => $giffyApiControllers.'ApiTagController@sync' ) );
 		Route::get( '/gifs/mine', $giffyApiControllers.'ApiGifController@mine' );
 		Route::get( '/gifs/{limit?}', $giffyApiControllers.'ApiGifController@fetch' );
@@ -35,6 +35,8 @@ Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) 
 
 Route::group( array( 'prefix' => 'tags' ), function() use ( $giffyControllers ) {
 		Route::post( '/save', array( 'uses' => $giffyControllers.'TagController@save' ) );
+		Route::post( '/sync', array( 'uses' => $giffyControllers.'TagController@sync' ) );
+		Route::get( '/mine', array( 'uses' => $giffyControllers.'TagController@mine' ) );
 	} );
 
 Route::group( array( 'prefix' => 'user' ), function() use ( $giffyControllers ) {

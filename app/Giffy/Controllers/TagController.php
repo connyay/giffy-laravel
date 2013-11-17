@@ -1,6 +1,7 @@
 <?php namespace Giffy\Controllers;
 
 use Input;
+use Illuminate\Support\Facades\Response;
 use Giffy\Repositories\TagRepositoryInterface;
 
 class TagController extends BaseController {
@@ -28,4 +29,17 @@ class TagController extends BaseController {
         $this->tags->create( $tagName );
     }
 
+    public function mine() {
+        $tags = $this->tags->mine( );
+        return Response::json( $tags->lists( "name" ) );
+    }
+
+
+    public function sync( ) {
+        $gif_id = Input::get( "gif_id" );
+        $tags = Input::get( "tags" );
+        $this->tags->syncGifTags( $gif_id, $tags )
+
+        return Response::json( "Successful Sync" );
+    }
 }

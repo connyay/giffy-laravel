@@ -33,7 +33,7 @@ $tags.tagsinput({
 	typeahead: {
 		source: function (query) {
 			if (!tagJson) {
-				tagJson = $.getJSON("{{ URL::to('api/tags/mine') }}");
+				tagJson = $.getJSON("{{ URL::to('tags/mine') }}");
 			}
 			return tagJson;
 		}
@@ -48,7 +48,7 @@ var initCount = $tags.tagsinput('items').length,
 			"tags": $tags.val()
 		};
 		$.ajax({
-			url: "{{ URL::to('api/tags/sync') }}",
+			url: "{{ URL::to('tags/sync') }}",
 			type: "POST",
 			data: data,
 			success: function (data, textStatus, jqXHR) {
