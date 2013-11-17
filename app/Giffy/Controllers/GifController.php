@@ -136,7 +136,7 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function save() {
+    public function store() {
         $imageUrl = Input::get( 'url' );
         $imageUrl = str_replace( ".jpg", ".gif", $imageUrl );
         $url = parse_url( $imageUrl );

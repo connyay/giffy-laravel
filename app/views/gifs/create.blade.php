@@ -15,7 +15,7 @@ New Gif
                 <h3 class="panel-title">New Gif</h3>
             </div>
             <div class="panel-body">
-                {{ Form::open(array('url' => 'gifs/create')) }}
+                {{ Form::open(array('url' => 'gifs')) }}
                 <fieldset>
                     <div class="form-group">
                         {{ Form::text('url', Input::old('url'), array('class' => 'form-control', 'placeholder' => 'i.imgur link')) }}

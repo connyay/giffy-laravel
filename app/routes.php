@@ -5,12 +5,12 @@ $giffyApiControllers = 'Giffy\Controllers\Api\\';
 
 Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) {
 		Route::get( '/', array( 'uses' => $giffyControllers.'GifController@index' ) );
+		Route::post( '/', array( 'uses' => $giffyControllers.'GifController@store' ) );
 		Route::get( '/mine', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@mine' ) );
 		Route::post( '/mine/{gif_id}', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@addToMine' ) );
 		Route::delete( '/mine/{gif_id}', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@removeFromMine' ) );
 		Route::get( '/create', array( 'uses' => $giffyControllers.'GifController@create' ) );
 		Route::get( '/show/{gif_id}', array( 'uses' => $giffyControllers.'GifController@show' ) );
-		Route::post( '/create', array( 'uses' => $giffyControllers.'GifController@save' ) );
 		Route::get( '/tag/{tag}', array( 'uses' => $giffyControllers.'GifController@tagged' ) );
 		Route::get( '/seed', array( 'uses' => $giffyControllers.'GifController@seed' ) );
 	} );
