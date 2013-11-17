@@ -7,12 +7,12 @@ class ApiController extends \Giffy\Controllers\BaseController {
 
     private $content_type = 'application/json';
 
-    protected function response( $dataKey, $data, $status ) {
+    protected function response( $dataKey, $data, $status, $count = false ) {
         switch ( $this->content_type ) {
         case 'application/json':
             $responseArray = [];
             $responseArray["status"] = $status;
-            if ( is_array( $data ) ) {
+            if ( $count && is_array( $data ) ) {
                 $responseArray["count"] = count( $data );
             }
             $responseArray[$dataKey] = $data;

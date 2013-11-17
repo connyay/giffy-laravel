@@ -34,7 +34,7 @@ class ApiGifController extends ApiController {
         foreach ( $gifs as $gif ) {
             $gif->thumb = URL::to( $gif->thumb );
         }
-        return $this->response( "gifs", $gifs->toArray(), 200 );
+        return $this->response( "gifs", $gifs->toArray(), 200, true );
     }
 
     /**
@@ -51,6 +51,6 @@ class ApiGifController extends ApiController {
             $gif->thumb = URL::to( $gif->thumb );
             unset( $gif->pivot );
         }
-        return $this->response( "gifs", $gifs->toArray(), 200 );
+        return $this->response( "gifs", $gifs->toArray(), 200, true );
     }
 }

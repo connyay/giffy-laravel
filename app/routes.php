@@ -35,6 +35,10 @@ Route::group( array( 'prefix' => 'api' ), function() use ( $giffyApiControllers 
 		Route::get( '/gifs/{limit?}', $giffyApiControllers.'ApiGifController@fetch' );
 		Route::get( '/gifs/limit/{limit}', $giffyApiControllers.'ApiGifController@fetch' );
 		Route::get( '/gifs/limit/{limit}/offset/{offset}', $giffyApiControllers.'ApiGifController@fetch' );
+
+		Route::get( '/', function() {
+				return View::make( 'api.doc', array('route' => 'giffy.co/api/'));
+			} );
 	} );
 
 
