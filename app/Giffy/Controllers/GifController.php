@@ -1,8 +1,9 @@
 <?php namespace Giffy\Controllers;
 
-use View, Auth, Input, App, Redirect, Thumb;
+use View, Auth, Input, App, Redirect, Thumb, Request;
 use Giffy\Repositories\GifRepositoryInterface;
 use Giffy\Models\Gif;
+use Giffy\Models\Tag;
 
 class GifController extends BaseController {
 
@@ -104,6 +105,23 @@ class GifController extends BaseController {
         $gifs = $this->gifs->tagged( $tag );
         // Show the page
         return View::make( 'gifs.index', compact( 'gifs' ) );
+    }
+
+
+    public function editTag( $id ) {
+        $gif = $this->gifs->find( $id );
+        $name = Input::get( 'name' );
+        if ( Request::getMethod() == 'DELETE' ) {
+            $tag = $gif->userTags()->where( 'tags.name', $name )->first();
+            $gif->userTags()->detach( $tag->id );
+        }
+        if ( Request::getMethod() == 'POST' ) {
+            $user_id = Auth::user()->id;
+            // TODO: Use tags repo to avoid dups
+            $tag = Tag::create( compact( 'name', 'user_id' ) );
+            $gif->userTags()->attach( $tag->id );
+        }
+        return View::make( 'gifs.view', compact( 'gif' ) );
     }
 
     public function addToMine( $id ) {

@@ -31,6 +31,8 @@ Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) 
 		Route::get( '/{gif_id}', array( 'uses' => $giffyControllers.'GifController@show' ) );
 		Route::get( '/tag/{tag}', array( 'uses' => $giffyControllers.'GifController@tagged' ) );
 		Route::get( '/seed', array( 'uses' => $giffyControllers.'GifController@seed' ) );
+		Route::post( '/{gif_id}/tag', array( 'uses' => $giffyControllers.'GifController@editTag' ) );
+		Route::delete( '/{gif_id}/tag', array( 'uses' => $giffyControllers.'GifController@editTag' ) );
 	} );
 
 Route::group( array( 'prefix' => 'tags' ), function() use ( $giffyControllers ) {
