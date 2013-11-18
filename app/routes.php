@@ -28,7 +28,7 @@ Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) 
 		Route::post( '/mine/{gif_id}', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@addToMine' ) );
 		Route::delete( '/mine/{gif_id}', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@removeFromMine' ) );
 		Route::get( '/create', array( 'uses' => $giffyControllers.'GifController@create' ) );
-		Route::get( '/show/{gif_id}', array( 'uses' => $giffyControllers.'GifController@show' ) );
+		Route::get( '/{gif_id}', array( 'uses' => $giffyControllers.'GifController@show' ) );
 		Route::get( '/tag/{tag}', array( 'uses' => $giffyControllers.'GifController@tagged' ) );
 		Route::get( '/seed', array( 'uses' => $giffyControllers.'GifController@seed' ) );
 	} );
