@@ -38,7 +38,7 @@ class TagController extends BaseController {
     public function sync( ) {
         $gif_id = Input::get( "gif_id" );
         $tags = Input::get( "tags" );
-        $this->tags->syncGifTags( $gif_id, $tags )
+        $this->tags->syncGifTags( $gif_id, $tags );
 
         return Response::json( "Successful Sync" );
     }
