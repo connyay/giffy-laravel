@@ -10,7 +10,7 @@ Gif
 @section('content')
 
 <div class="thumbnail well">
-	<img src="{{{URL::to($gif->url)}}}" />
+	<img class="img" src="{{{URL::to($gif->url)}}}" />
 	<div class="caption">
 
 		@if (!Auth::guest()) 
