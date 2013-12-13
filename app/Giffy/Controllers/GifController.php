@@ -31,7 +31,7 @@ class GifController extends BaseController {
      * @return Response
      */
     public function seed() {
-        $array = (array) json_decode( file_get_contents( "http://www.reddit.com/r/reactiongifs/top/.json?sort=top&t=day&limit=50" ), true );
+        $array = (array) json_decode( file_get_contents( "http://www.reddit.com/r/reactiongifs/top/.json?sort=top&t=day&limit=100" ), true );
         $i = 0;
         foreach ( $array["data"]["children"] as $child ) {
             $data = $child["data"];
