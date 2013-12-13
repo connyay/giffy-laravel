@@ -48,7 +48,6 @@ class GifController extends BaseController {
                 $i++;
                 echo "\nAdded: " . $imageUrl ."\n";
             }
-            sleep( 1 );
         }
         echo "all done? added: " . $i . " images";
     }
