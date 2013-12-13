@@ -69,6 +69,7 @@ class DbGifRepository implements GifRepositoryInterface {
 	 * @return Post
 	 */
 	public function create( $url ) {
+		$this->cleanURL( $url );
 		$thumb = $this->buildThumb( $url );
 		return Gif::create( compact( 'url', 'thumb' ) );
 	}
@@ -88,19 +89,35 @@ class DbGifRepository implements GifRepositoryInterface {
 	}
 
 	/**
+	 * Checks existance of gif
+	 *
+	 * @param string  $url
+	 * @return bool
+	 */
+	public function exists( $url ) {
+		$this->cleanURL( $url );
+		$exists = Gif::where( "url", "=", $url )->first();
+		return ( is_null( $exists ) ) ? false : true;
+	}
+
+	/**
 	 * Builds thumbnail from url
 	 *
 	 * @param string  $url
 	 * @return string
 	 */
 	private function buildThumb( $url ) {
-		$imageUrl = str_replace( ".jpg", ".gif", $url );
-		$imageUrl = explode( "?", $imageUrl );
-		$imageUrl = $imageUrl[0];
-		$url = parse_url( $imageUrl );
-		$fileName = $url["path"];
+		$parsedURL = parse_url( $url );
+		$fileName = $parsedURL["path"];
 		$thumbPath = '/thumbs' . $fileName;
-		Thumb::create( $imageUrl )->make( 'resize', array( 150, 150, 'adaptive' ) )->save( public_path() . "/thumbs/" );
+		Thumb::create( $url )->make( 'resize', array( 150, 150, 'adaptive' ) )->save( public_path() . "/thumbs/" );
 		return $thumbPath;
+	}
+
+	private function cleanURL( &$url ) {
+		$url = str_replace( ".jpg", ".gif", $url );
+		$url = explode( "?", $url );
+		$url = $url[0];
+		$url = str_finish( $url, '.gif' );
 	}
 }

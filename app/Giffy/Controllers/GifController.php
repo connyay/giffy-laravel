@@ -38,8 +38,8 @@ class GifController extends BaseController {
 
             if ( $data["domain"] === "i.imgur.com" ) {
                 $imageUrl = $data["url"];
-                $exists = Gif::where( "url", $imageUrl )->first();
-                if ( !is_null( $exists ) ) {
+                $exists = $this->gifs->exists( $imageUrl );
+                if ( $exists ) {
                     echo "\nWe already have " . $imageUrl . " saved.\n";
                     continue;
                 }
@@ -155,7 +155,6 @@ class GifController extends BaseController {
      */
     public function store() {
         $imageUrl = Input::get( 'url' );
-        $imageUrl = str_replace( ".jpg", ".gif", $imageUrl );
         $url = parse_url( $imageUrl );
 
         if ( !isset( $url["host"] ) || !isset( $url["path"] ) ) {
@@ -165,9 +164,8 @@ class GifController extends BaseController {
         if ( $url["host"] !== "i.imgur.com" ) {
             return Redirect::to( 'gifs/create' )->with( 'error', 'How about an i.imgur.com link?' )->withInput();
         }
-
-        $exists = Gif::where( "url", "=", $imageUrl )->first();
-        if ( !is_null( $exists ) ) {
+        $exists = $this->gifs->exists( $imageUrl );
+        if ( $exists ) {
             return Redirect::to( 'gifs/create' )->with( 'error', 'We already have that gif.' )->withInput();
         }
 

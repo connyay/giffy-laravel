@@ -60,4 +60,12 @@ interface GifRepositoryInterface {
 	 * @return Gifs
 	 */
 	public function apiFetch( $limit, $offset );
+
+	/**
+	 * Checks existance of gif
+	 *
+	 * @param string  $url
+	 * @return bool
+	 */
+	public function exists( $url );
 }
