@@ -2,4 +2,3 @@
 !.gitignore
 !app.php.example
 !database.php.example
-!session.php.example
