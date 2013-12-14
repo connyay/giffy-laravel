@@ -1,8 +1,12 @@
 {
+	"repositories": [{
+		"type": "vcs",
+		"url": "https://github.com/connyay/Thumb"
+	}],
 	"require": {
-		"laravel/framework": "4.0.*@dev",
-		"mews/thumb": "dev-master",
-		"way/generators": "dev-master"
+		"laravel/framework": "4.1.*",
+		"way/generators": "dev-master",
+		"mews/thumb": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

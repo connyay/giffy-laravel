@@ -3,7 +3,7 @@
 $giffyControllers = 'Giffy\Controllers\\';
 $giffyApiControllers = 'Giffy\Controllers\Api\\';
 
-$domain = ( App::environment() == 'production' ) ? 'giffy.co' : 'giffy.localhost';
+$domain = ( App::environment() == 'production' ) ? 'giffy.co' : 'giffy.dev';
 
 
 Route::group( array( 'domain' => 'api.' . $domain ), function() use ( $giffyApiControllers ) {
