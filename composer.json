@@ -9,7 +9,8 @@
 		"twbs/bootstrap": "3.0.3"
 	},
 	"require-dev": {
-		"jason-morton-nz/laravel-grunt": "dev-master"
+		"jason-morton-nz/laravel-grunt": "dev-master",
+		"barryvdh/laravel-debugbar": "1.*"
 	},
 	"autoload": {
 		"classmap": [

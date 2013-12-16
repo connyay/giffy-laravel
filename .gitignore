@@ -1,6 +1,7 @@
 #Ignore:
 /bootstrap/compiled.php
 /vendor
+/public/packages
 composer.phar
 composer.lock
 /app/config/sendGridConfig.php

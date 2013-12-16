@@ -38,6 +38,7 @@ return array(
 		'Mews\Thumb\ThumbServiceProvider',
 		'Giffy\GiffyServiceProvider',
 		'JasonNZ\LaravelGrunt\LaravelGruntServiceProvider',
+		'Barryvdh\Debugbar\ServiceProvider',
 	),
 
 );

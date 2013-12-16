@@ -1,6 +1,6 @@
 <?php namespace Giffy\Controllers;
 
-use View, Auth, Input, App, Redirect, Thumb, Request;
+use View, Auth, Input, App, Redirect, Thumb, Request, Cache;
 use Giffy\Repositories\GifRepositoryInterface;
 use Giffy\Models\Gif;
 use Giffy\Models\Tag;
@@ -170,6 +170,7 @@ class GifController extends BaseController {
         }
 
         if ( $this->gifs->create( $imageUrl ) ) {
+            Cache::tags('paginated-gifs')->flush();
             return Redirect::to( 'gifs' )->with( 'success', 'Gif Saved!' );
         } else {
             return Redirect::to( 'gifs/create' )->with( 'error', 'Oops! There was a problem saving the gif.' )->withInput();
