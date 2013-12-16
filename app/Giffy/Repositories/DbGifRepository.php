@@ -24,7 +24,12 @@ class DbGifRepository implements GifRepositoryInterface {
 	 */
 	public function paginate( $per_page ) {
 		$per_page = is_numeric( $per_page ) ? $per_page : 12;
-		return Gif::rememberForever()->cacheTags('paginated-gifs')->orderBy( 'id', 'DESC' )->paginate( $per_page );
+		$query = Gif::rememberForever()->cacheTags('paginated-gifs')->orderBy( 'id', 'DESC' );
+		// Eager load user relationship if user is logged in.
+		if(Auth::check()){
+			$query->with('users');
+		}
+		return  $query->paginate( $per_page );
 	}
 
 	/**
