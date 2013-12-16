@@ -5,7 +5,6 @@
 	}],
 	"require": {
 		"laravel/framework": "4.1.*",
-		"way/generators": "dev-master",
 		"mews/thumb": "dev-master"
 	},
 	"autoload": {
