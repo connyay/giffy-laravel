@@ -7,8 +7,7 @@
          @show 
       </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-      <!--<link href="{{ asset('css/bootstrap-responsive.css') }}" rel="stylesheet"> -->
+      <link href="{{ asset('assets/style.min.css') }}" rel="stylesheet">
       <style>
          @section('styles')
          body {
@@ -65,8 +64,7 @@
       <!-- Javascripts
          ================================================== -->
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-      <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-      <script src="{{ asset('js/restfulizer.js') }}"></script> <!-- Thanks to Zizaco for this script:  http://zizaco.net  -->
+      <script src="{{ asset('assets/script.min.js') }}"></script>
       <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-growl/1.0.0/jquery.bootstrap-growl.min.js"></script>
       @yield('scripts')
       <!-- Notifications -->

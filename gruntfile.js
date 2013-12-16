@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 		// User editable project settings & variables
 		options: {
 			// Base path to your assets folder
-			base: 'assets',
+			base: 'app/assets',
 
 			// Published assets path
 			publish: 'public/assets',
@@ -22,24 +22,24 @@ module.exports = function (grunt) {
 
 			// CSS settings
 			css: {
-				base: 'assets/css',			 				// Base path to your CSS folder
-				files: ['assets/css/style_one.css','assets/css/style_two.css'],							// CSS files in order you'd like them concatenated and minified
+				base: 'app/assets/css',			 				// Base path to your CSS folder
+				files: ['app/assets/css/less.css'],							// CSS files in order you'd like them concatenated and minified
 				concat: '<%= options.css.base %>/concat.css',	// Name of the concatenated CSS file
 				min: '<%= options.publish %>/style.min.css'		// Name of the minified CSS file
 			},
 
 			// JavaScript settings
 			js: {
-				base: 'assets/js',							// Base path to you JS folder
-				files: ['assets/js/script_one.js','assets/js/script_two.js'],							// JavaScript files in order you'd like them concatenated and minified
+				base: 'app/assets/js',							// Base path to you JS folder
+				files: ['app/assets/js/bootstrap.js','app/assets/js/restfulizer.js','app/assets/js/bootstrap-tagsinput.js'],							// JavaScript files in order you'd like them concatenated and minified
 				concat: '<%= options.js.base %>/concat.js',		// Name of the concatenated JavaScript file
 				min: '<%= options.publish %>/script.min.js'		// Name of the minified JavaScript file
 			},
 
 			// LESS Settings
 			less: {
-				base: 'assets/less',							// Base path to you LESS folder
-				file: 'assets/less/main.less',							// LESS file (ideally, one file which contains imports)
+				base: 'app/assets/less',							// Base path to you LESS folder
+				file: 'app/assets/less/master.less',							// LESS file (ideally, one file which contains imports)
 				compiled: '<%= options.css.base %>/less.css'	// Name of the compiled LESS file
 			},
 

@@ -5,7 +5,8 @@
 	}],
 	"require": {
 		"laravel/framework": "4.1.*",
-		"mews/thumb": "dev-master"
+		"mews/thumb": "dev-master",
+		"twbs/bootstrap": "3.0.*"
 	},
 	"require-dev": {
 		"jason-morton-nz/laravel-grunt": "dev-master"

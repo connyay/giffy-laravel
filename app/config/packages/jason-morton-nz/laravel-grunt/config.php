@@ -11,7 +11,7 @@ return array(
 	| directory. We've set a sensible default, but feel free to update it.
 	|
 	*/
-	'assets_path' => 'assets',
+	'assets_path' => 'app/assets',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -34,7 +34,7 @@ return array(
 	| directory. We've set a sensible default, but feel free to update it.
 	|
 	*/
-	'css_path' => 'assets/css',
+	'css_path' => 'app/assets/css',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -47,8 +47,7 @@ return array(
 	|
 	*/
 	'css_files' => array(
-		'assets/css/style_one.css',
-		'assets/css/style_two.css'
+		'app/assets/css/less.css'
 	),
 
 	/*
@@ -60,7 +59,7 @@ return array(
 	| directory. We've set a sensible default, but feel free to update it.
 	|
 	*/
-	'js_path' => 'assets/js',
+	'js_path' => 'app/assets/js',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -73,8 +72,9 @@ return array(
 	|
 	*/
 	'js_files' => array(
-		'assets/js/script_one.js',
-		'assets/js/script_two.js'
+		'app/assets/js/bootstrap.js',
+		'app/assets/js/restfulizer.js',
+		'app/assets/js/bootstrap-tagsinput.js',
 	),
 
 	/*
@@ -86,7 +86,7 @@ return array(
 	| directory. We've set a sensible default, but feel free to update it.
 	|
 	*/
-	'less_path' => 'assets/less',
+	'less_path' => 'app/assets/less',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -100,53 +100,7 @@ return array(
 	| Note: you LESS will be compiled into a file named "less.css" in the
 	| specified "css_path" above. So be sure to add it into your "css_files" array
 	*/
-	'less_file' => 'assets/less/main.less',
-
-	/*
-	|--------------------------------------------------------------------------
-	| The SASS Path
-	|--------------------------------------------------------------------------
-	|
-	| This is where you can specify a custom path to your SASS
-	| directory. We've set a sensible default, but feel free to update it.
-	|
-	*/
-	'sass_path' => 'assets/sass',
-
-	/*
-	|--------------------------------------------------------------------------
-	| The Main SASS file
-	|--------------------------------------------------------------------------
-	|
-	| This is where you can specify a custom path to your main SASS
-	| file, which should include all imports to other SASS files.
-	| We've set a sensible default, but feel free to update it.
-	|
-	*/
-	'sass_file' => 'assets/sass/main.sass',
-
-	/*
-	|--------------------------------------------------------------------------
-	| The Stylus Path
-	|--------------------------------------------------------------------------
-	|
-	| This is where you can specify a custom path to your Stylus
-	| directory. We've set a sensible default, but feel free to update it.
-	|
-	*/
-	'stylus_path' => 'assets/stylus',
-
-	/*
-	|--------------------------------------------------------------------------
-	| The Main Stylus file
-	|--------------------------------------------------------------------------
-	|
-	| This is where you can specify a custom path to your main Stylus
-	| file, which should include all imports to other Stylus files.
-	| We've set a sensible default, but feel free to update it.
-	|
-	*/
-	'stylus_file' => 'assets/stylus/main.stylus',
+	'less_file' => 'app/assets/less/master.less',
 
 	/*
 	|--------------------------------------------------------------------------
