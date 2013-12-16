@@ -48,7 +48,7 @@ class DbGifRepository implements GifRepositoryInterface {
 	 * @return Gif
 	 */
 	public function find( $id ) {
-		return Gif::find( $id );
+		return Gif::rememberForever('gif-'.$id)->find( $id );
 	}
 
 	/**
