@@ -22,9 +22,9 @@ All Gifs
 				</a>
 				<div class="caption">
 				
-					<p><a href="{{ URL::to('gifs/show', array('id'=>$gif->id)) }}" class="btn btn-primary btn-block">Open</a></p>
+					<p><a href="{{ URL::to('gifs/show', array('id'=>$gif->id)) }}" class="btn btn-success btn-block">Open</a></p>
 					@if (!Auth::guest()) 
-					<p><a href="{{ URL::to('gifs/mine', array('id'=>$gif->id)) }}" data-token="{{Session::token()}}" data-method="delete" class="btn btn-primary btn-block">Remove From My Giffy</a></p>
+					<p><a href="{{ URL::to('gifs/mine', array('id'=>$gif->id)) }}" data-token="{{Session::token()}}" data-method="delete" class="btn btn-success btn-block">Remove From My Giffy</a></p>
 					@endif
 					<input type="text" class="form-control" value="{{{$gif->url}}}">
 					

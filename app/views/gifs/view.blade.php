@@ -14,7 +14,7 @@ Gif
 	<div class="caption">
 
 		@if (!Auth::guest()) 
-		<p><a href="{{ URL::to('gifs/mine', array('id'=>$gif->id)) }}" {{$gif->users->contains(Auth::user()->id) ? "disabled" : ""}} data-token="{{Session::token()}}" data-method="post" class="btn btn-primary btn-block">Add To My Giffy</a></p>
+		<p><a href="{{ URL::to('gifs/mine', array('id'=>$gif->id)) }}" {{$gif->users->contains(Auth::user()->id) ? "disabled" : ""}} data-token="{{Session::token()}}" data-method="post" class="btn btn-success btn-block">Add To My Giffy</a></p>
 		<input type="text" class="form-control tags" data-role="tagsinput" placeholder="Enter Gif Tags" value="{{ implode(',', $gif->userTags()->lists("name")) }}">
 		@endif
 		<input type="text" class="form-control" value="{{{$gif->url}}}">
@@ -25,7 +25,6 @@ Gif
 @stop
 
 @section('scripts')
-<script src="{{ asset('js/bootstrap-tagsinput.min.js') }}"></script>
 <script>
 var $tags = $('.tags'),
 	tagJson;

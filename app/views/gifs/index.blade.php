@@ -20,9 +20,9 @@ All Gifs
 					<img class="img" src="{{{URL::to($gif->thumb)}}}" data-thumb-src="{{{URL::to($gif->thumb)}}}" data-full-src="{{{$gif->url}}}" />
 				</a>
 				<div class="caption">
-					<p><a href="{{ URL::to('gifs', array('id'=>$gif->id)) }}" class="btn btn-primary btn-block">Open</a></p>
+					<p><a href="{{ URL::to('gifs', array('id'=>$gif->id)) }}" class="btn btn-success btn-block">Open</a></p>
 					@if (!Auth::guest()) 
-					<p><a href="{{ URL::to('gifs/mine', array('id'=>$gif->id)) }}" {{$gif->users->contains(Auth::user()->id) ? "disabled" : ""}}  data-token="{{Session::token()}}" data-method="post" class="btn btn-primary btn-block">Add To My Giffy</a></p>
+					<p><a href="{{ URL::to('gifs/mine', array('id'=>$gif->id)) }}" {{$gif->users->contains(Auth::user()->id) ? "disabled" : ""}}  data-token="{{Session::token()}}" data-method="post" class="btn btn-success btn-block">Add To My Giffy</a></p>
 					@endif
 
 

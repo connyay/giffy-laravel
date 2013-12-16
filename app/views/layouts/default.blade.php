@@ -10,9 +10,6 @@
       <link href="{{ asset('assets/style.min.css') }}" rel="stylesheet">
       <style>
          @section('styles')
-         body {
-         padding-top: 60px;
-         }
          @show
       </style>
       <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
