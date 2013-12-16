@@ -7,6 +7,9 @@
 		"laravel/framework": "4.1.*",
 		"mews/thumb": "dev-master"
 	},
+	"require-dev": {
+		"jason-morton-nz/laravel-grunt": "dev-master"
+	},
 	"autoload": {
 		"classmap": [
 			"app/commands",
