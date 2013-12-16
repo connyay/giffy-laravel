@@ -50,7 +50,7 @@ class GifController extends BaseController {
             }
         }
         echo "all done? added: " . $i . " images";
-        Cache::tags('paginated-gifs')->flush();
+        Cache::tags( 'paginated-gifs' )->flush();
     }
 
     /**
@@ -171,7 +171,7 @@ class GifController extends BaseController {
         }
 
         if ( $this->gifs->create( $imageUrl ) ) {
-            Cache::tags('paginated-gifs')->flush();
+            Cache::tags( 'paginated-gifs' )->flush();
             return Redirect::to( 'gifs' )->with( 'success', 'Gif Saved!' );
         } else {
             return Redirect::to( 'gifs/create' )->with( 'error', 'Oops! There was a problem saving the gif.' )->withInput();

@@ -24,10 +24,10 @@ class DbGifRepository implements GifRepositoryInterface {
 	 */
 	public function paginate( $per_page ) {
 		$per_page = is_numeric( $per_page ) ? $per_page : 12;
-		$query = Gif::rememberForever()->cacheTags('paginated-gifs')->orderBy( 'id', 'DESC' );
+		$query = Gif::rememberForever()->cacheTags( 'paginated-gifs' )->orderBy( 'id', 'DESC' );
 		// Eager load user relationship if user is logged in.
-		if(Auth::check()){
-			$query->with('users');
+		if ( Auth::check() ) {
+			$query->with( 'users' );
 		}
 		return  $query->paginate( $per_page );
 	}
@@ -53,7 +53,7 @@ class DbGifRepository implements GifRepositoryInterface {
 	 * @return Gif
 	 */
 	public function find( $id ) {
-		return Gif::rememberForever('gif-'.$id)->find( $id );
+		return Gif::rememberForever( 'gif-'.$id )->find( $id );
 	}
 
 	/**
