@@ -145,7 +145,7 @@ class UserController extends BaseController {
 				$message_notice = 'Account Created.';
 
 				// redirect to game page
-				return Redirect::route( 'home.index' )
+				return Redirect::route( 'gifs.index' )
 				->with( 'flash_success', $message_success )
 				->with( 'flash_notice', $message_notice );
 
