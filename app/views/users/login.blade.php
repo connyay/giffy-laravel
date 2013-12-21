@@ -28,6 +28,7 @@ Log In
                 {{ Form::close() }}
             </div>
         </div>
+        <a href="{{ URL::to('user/login/google') }}" class="btn btn-success btn-block">Login With Google</a>
     </div>
 </div>
 
