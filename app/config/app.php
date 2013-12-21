@@ -108,6 +108,7 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
 		'Mews\Thumb\ThumbServiceProvider', // PHPThumb
+		'Artdarek\OAuth\OAuthServiceProvider',
 		'Giffy\GiffyServiceProvider',
 	),
 
@@ -175,7 +176,8 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
-		'Thumb'     => 'Mews\Thumb\Facades\Thumb', // PHPThumb
+		'Thumb'    		  => 'Mews\Thumb\Facades\Thumb', // PHPThumb
+		'OAuth'			  => 'Artdarek\OAuth\Facade\OAuth', // OAuth
 	),
 
 );

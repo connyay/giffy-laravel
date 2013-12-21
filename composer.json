@@ -6,6 +6,7 @@
 	"require": {
 		"laravel/framework": "4.1.*",
 		"mews/thumb": "dev-master",
+		"artdarek/oauth-4-laravel": "dev-master",
 		"twbs/bootstrap": "3.0.3"
 	},
 	"require-dev": {
