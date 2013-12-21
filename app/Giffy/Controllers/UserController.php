@@ -1,6 +1,7 @@
 <?php namespace Giffy\Controllers;
 
 use View, Auth, Input, Redirect, Validator, OAuth, Response;
+use Giffy\Models\User;
 class UserController extends BaseController {
 
 	public function login() {
@@ -111,7 +112,7 @@ class UserController extends BaseController {
 			// try to login
 
 			// get user by twitter_id
-			$user = User::where( [ 'twitter_id' => $result->id ] )->first();
+			$user = User::where( 'twitter_id', '=', $result->id )->first();
 
 			// check if user exists
 			if ( $user ) {
@@ -122,7 +123,7 @@ class UserController extends BaseController {
 				$message = 'Your unique twitter user id is: ' . $result->id . ' and your name is ' . $result->name;
 
 				// redirect to user profile
-				return Redirect::route( 'home.index' )
+				return Redirect::route( 'gifs.index' )
 				->with( 'flash_success', $message );
 
 			}
@@ -130,9 +131,7 @@ class UserController extends BaseController {
 				// FIRST TIME TWITTER LOGIN
 
 				// create new user
-				$user = User::createNew( [
-					'firstname' => $result->name,
-					'lastname' => null,
+				$user = User::create( [
 					'username' => $result->screen_name,
 					'twitter_id' => $result->id,
 					] );

@@ -22,7 +22,7 @@ Route::group( array( 'domain' => 'api.' . $domain ), function() use ( $giffyApiC
 	} );
 
 Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) {
-		Route::get( '/', array( 'uses' => $giffyControllers.'GifController@index' ) );
+		Route::get( '/', array( 'as'=>'gifs.index', 'uses' => $giffyControllers.'GifController@index' ) );
 		Route::post( '/', array( 'uses' => $giffyControllers.'GifController@store' ) );
 		Route::get( '/mine', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@mine' ) );
 		Route::post( '/mine/{gif_id}', array( 'before' => 'auth', 'uses' => $giffyControllers.'GifController@addToMine' ) );
@@ -44,6 +44,7 @@ Route::group( array( 'prefix' => 'tags' ), function() use ( $giffyControllers ) 
 Route::group( array( 'prefix' => 'user' ), function() use ( $giffyControllers ) {
 		Route::get( '/login', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@login' ) );
 		Route::get( '/login/google', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@loginWithGoogle' ) );
+		Route::get( '/login/twitter', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@loginWithTwitter' ) );
 		Route::post( '/login', array( 'uses' => $giffyControllers.'UserController@doLogin' ) );
 		Route::get( '/logout', array( 'uses' => $giffyControllers.'UserController@logout' ) );
 	} );

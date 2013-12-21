@@ -29,6 +29,7 @@ Log In
             </div>
         </div>
         <a href="{{ URL::to('user/login/google') }}" class="btn btn-success btn-block">Login With Google</a>
+        <a href="{{ URL::to('user/login/twitter') }}" class="btn btn-success btn-block">Login With Twitter</a>
     </div>
 </div>
 
