@@ -27,8 +27,8 @@ return array(
             'scope'         => array(),
         ),
         'Twitter' => array(
-            'client_id'     => '',
-            'client_secret' => '',
+            'client_id'     => 's4bprIQaDwv2SUXQHnq9A',
+            'client_secret' => 'p8itL2H03C81lx1BszL1GpxRMNeCr2YXRBtpUavc',
             'scope'         => array(),
         ),
         'Google' => array(
