@@ -68,4 +68,9 @@ interface GifRepositoryInterface {
 	 * @return bool
 	 */
 	public function exists( $url );
+
+	/**
+	 * Cleans duplicate gifs from database
+	 */
+	public function cleanDuplicates( );
 }

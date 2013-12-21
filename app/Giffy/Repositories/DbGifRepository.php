@@ -1,6 +1,6 @@
 <?php namespace Giffy\Repositories;
 
-use Auth, URL, Thumb;
+use Auth, URL, Thumb, DB;
 use Giffy\Models\Gif;
 use Giffy\Models\Tag;
 
@@ -103,6 +103,13 @@ class DbGifRepository implements GifRepositoryInterface {
 		$this->cleanURL( $url );
 		$exists = Gif::where( "url", "=", $url )->first();
 		return ( is_null( $exists ) ) ? false : true;
+	}
+
+	/**
+	 * Cleans duplicate entries from the gif table
+	 */
+	public function cleanDuplicates() {
+		DB::delete( DB::raw( 'DELETE g1 FROM gifs g1, gifs g2 WHERE g1.id > g2.id AND g1.url = g2.url' ) );
 	}
 
 	/**

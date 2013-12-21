@@ -51,6 +51,7 @@ class GifController extends BaseController {
         }
         echo "all done? added: " . $i . " images";
         Cache::tags( 'paginated-gifs' )->flush();
+        $this->gifs->cleanDuplicates();
     }
 
     /**
