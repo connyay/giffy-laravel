@@ -125,7 +125,7 @@ class UserController extends BaseController {
 
 				// redirect to user profile
 				return Redirect::route( 'gifs.index' )
-				->with( 'flash_success', $message );
+				->with( 'success', $message );
 
 			}
 			else {
@@ -147,8 +147,8 @@ class UserController extends BaseController {
 
 				// redirect to game page
 				return Redirect::route( 'gifs.index' )
-				->with( 'flash_success', $message_success )
-				->with( 'flash_notice', $message_notice );
+				->with( 'success', $message_success )
+				->with( 'info', $message_notice );
 
 			}
 		}
@@ -184,7 +184,42 @@ class UserController extends BaseController {
 			// Send a request with it
 			$result = json_decode( $redditService->request( 'https://oauth.reddit.com/api/v1/me.json' ), true );
 
+			$user = User::where( 'reddit_id', '=', $result->id )->first();
 
+			if ( $user ) {
+				// login user
+				Auth::login( $user );
+
+				// build message with some of the resultant data
+				$message = 'Your unique reddit user id is: ' . $result->id . ' and your name is ' . $result->name;
+
+				// redirect to user profile
+				return Redirect::route( 'gifs.index' )
+				->with( 'success', $message );
+
+			} else {
+				// FIRST TIME Reddit LOGIN
+
+				// create new user
+				$user = User::create( [
+					'username' => $result->name,
+					'reddit_id' => $result->id,
+					] );
+				$user->save();
+
+				// login user
+				Auth::login( $user );
+
+				// build message with some of the resultant data
+				$message = 'Your unique reddit user id is: ' . $result->id . ' and your name is ' . $result->name;
+				$message_notice = 'Account Created.';
+
+				// redirect to game page
+				return Redirect::route( 'gifs.index' )
+				->with( 'success', $message_success )
+				->with( 'success', $message_notice );
+
+			}
 			//Var_dump
 			//display whole array().
 			dd( $result );
