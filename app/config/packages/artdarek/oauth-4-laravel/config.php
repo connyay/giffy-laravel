@@ -22,7 +22,7 @@ return array(
 		 * Facebook
 		 */
         'Reddit' => array(
-            'client_id'     => '',
+            'client_id'     => 'KvPfBRpzq0hwbg',
             'client_secret' => 'hvZFSQOBPf6LEV9aExAdp81lGEM',
             'scope'         => array('identity'),
         ),
