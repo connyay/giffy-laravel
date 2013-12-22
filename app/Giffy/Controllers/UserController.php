@@ -1,7 +1,7 @@
 <?php namespace Giffy\Controllers;
 
 use View, Auth, Input, Redirect, Validator,
-OAuth, Response, Session, Hash, Giffy;
+OAuth, Response, Session, Hash, Giffy, Str;
 use Giffy\Models\User;
 
 class UserController extends BaseController {
@@ -41,7 +41,7 @@ class UserController extends BaseController {
 			}
 			// create our user data for the authentication
 			$user = User::create( [
-				'username' => Input::get( 'username' ),
+				'username' => Str::lower( Input::get( 'username' ) ),
 				'password' => Hash::make( Input::get( 'password' ) ),
 				] );
 			$user->save();
@@ -71,7 +71,7 @@ class UserController extends BaseController {
 		} else {
 			// create our user data for the authentication
 			$userdata = array(
-				'username'  => Input::get( 'username' ),
+				'username'  => Str::lower( Input::get( 'username' ) ),
 				'password'  => Input::get( 'password' )
 			);
 
