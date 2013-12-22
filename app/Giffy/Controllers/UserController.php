@@ -1,6 +1,7 @@
 <?php namespace Giffy\Controllers;
 
-use View, Auth, Input, Redirect, Validator, OAuth, Response;
+use View, Auth, Input, Redirect, Validator, 
+	OAuth, Response, Session;
 use Giffy\Models\User;
 class UserController extends BaseController {
 
@@ -177,7 +178,6 @@ class UserController extends BaseController {
 
 		// if code is provided get user data and sign in
 		if ( !empty( $code ) ) {
-
 			// This was a callback request from google, get the token
 			$token = $redditService->requestAccessToken( $code );
 
@@ -193,7 +193,7 @@ class UserController extends BaseController {
 		// if not ask for permission first
 		else {
 			// get redditService authorization
-			$url = $redditService->getAuthorizationUri();
+			$url = $redditService->getAuthorizationUri(array('state'=>Session::token()));
 			//dd( $url );
 			// return to facebook login url
 			return Redirect::to( (string)$url );

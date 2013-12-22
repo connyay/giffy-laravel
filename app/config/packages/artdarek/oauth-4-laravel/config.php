@@ -34,7 +34,7 @@ return array(
         'Google' => array(
             'client_id'     => '224324691909-9tot2a7a60h6pbh40kuvfmh40u0hrm18.apps.googleusercontent.com',
             'client_secret' => 'ltF-lh4l7FK-WJd0kEPL-deA',
-            'scope'         => array('profile'),
+            'scope'         => array('https://www.googleapis.com/auth/plus.login'),
         ),
 
 	)
