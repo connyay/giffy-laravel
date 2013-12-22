@@ -38,10 +38,30 @@ class DbTagRepository implements TagRepositoryInterface {
 		try {
 			return Tag::create( compact( 'name', 'user_id' ) );
 		} catch ( \Exception $e ) {
-			return Tag::where( "name", "=", $name )->first();
+			return Tag::where( "name", "=", $name )
+				->where( 'user_id', '=', $user_id )->first();
 		}
 	}
 
+	public function find( $name ) {
+		$name = strtolower( $name );
+		$user_id = Auth::user()->id;
+		return Tag::where( "name", "=", $name )
+			->where( 'user_id', '=', $user_id )->first();
+
+	}
+
+	public function add( $gif_id, $tag ) {
+		$gif = Gif::find( $gif_id );
+		$gif->tags()->attach( $this->create( $tag )->id );
+		return true;
+	}
+
+	public function remove( $gif_id, $tag ) {
+		$gif = Gif::find( $gif_id );
+		$gif->tags()->detach( $this->find( $tag )->id );
+		return true;
+	}
 	/**
 	 * Syncs the gif and tag relationships
 	 *

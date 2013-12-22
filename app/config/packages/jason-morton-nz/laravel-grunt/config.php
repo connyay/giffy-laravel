@@ -74,7 +74,7 @@ return array(
 	'js_files' => array(
 		'app/assets/js/bootstrap.js',
 		'app/assets/js/restfulizer.js',
-		'app/assets/js/bootstrap-tagsinput.js',
+		'app/assets/js/selectize.js',
 	),
 
 	/*

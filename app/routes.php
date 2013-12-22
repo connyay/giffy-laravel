@@ -37,6 +37,8 @@ Route::group( array( 'prefix' => 'gifs' ), function() use ( $giffyControllers ) 
 
 Route::group( array( 'prefix' => 'tags' ), function() use ( $giffyControllers ) {
 		Route::post( '/save', array( 'uses' => $giffyControllers.'TagController@save' ) );
+		Route::post( '/add', array( 'uses' => $giffyControllers.'TagController@add' ) );
+		Route::post( '/remove', array( 'uses' => $giffyControllers.'TagController@remove' ) );
 		Route::post( '/sync', array( 'uses' => $giffyControllers.'TagController@sync' ) );
 		Route::get( '/mine', array( 'uses' => $giffyControllers.'TagController@mine' ) );
 	} );

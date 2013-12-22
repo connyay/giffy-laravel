@@ -32,4 +32,10 @@ interface TagRepositoryInterface {
 	 * @return JSON
 	 */
 	public function syncGifTags( $gif_id, $tags );
+
+	public function add( $gif_id, $tag );
+
+	public function remove( $gif_id, $tag );
+
+	public function find( $name );
 }

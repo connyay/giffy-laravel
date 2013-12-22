@@ -31,7 +31,7 @@ module.exports = function (grunt) {
 			// JavaScript settings
 			js: {
 				base: 'app/assets/js',							// Base path to you JS folder
-				files: ['app/assets/js/bootstrap.js','app/assets/js/restfulizer.js','app/assets/js/bootstrap-tagsinput.js'],							// JavaScript files in order you'd like them concatenated and minified
+				files: ['app/assets/js/bootstrap.js','app/assets/js/restfulizer.js','app/assets/js/selectize.js'],							// JavaScript files in order you'd like them concatenated and minified
 				concat: '<%= options.js.base %>/concat.js',		// Name of the concatenated JavaScript file
 				min: '<%= options.publish %>/script.min.js'		// Name of the minified JavaScript file
 			},

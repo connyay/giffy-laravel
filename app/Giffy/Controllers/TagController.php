@@ -34,6 +34,19 @@ class TagController extends BaseController {
         return Response::json( $tags->lists( "name" ) );
     }
 
+    public function add() {
+        $gif_id = Input::get( "gif_id" );
+        $tag = Input::get( "tag" );
+        $this->tags->add( $gif_id, $tag );
+        return Response::json( "Added " . $tag );
+    }
+
+    public function remove() {
+        $gif_id = Input::get( "gif_id" );
+        $tag = Input::get( "tag" );
+        $this->tags->remove( $gif_id, $tag );
+        return Response::json( "Removed " . $tag );
+    }
 
     public function sync( ) {
         $gif_id = Input::get( "gif_id" );
