@@ -82,7 +82,7 @@ class UserController extends BaseController {
 			// get googleService authorization
 			$url = $googleService->getAuthorizationUri();
 			//dd( $url );
-			// return to facebook login url
+			// return to google login url
 			return Redirect::to( (string)$url );
 		}
 	}
@@ -163,5 +163,40 @@ class UserController extends BaseController {
 
 		}
 
+	}
+
+	public function loginWithReddit() {
+
+		// get data from input
+		$code = Input::get( 'code' );
+
+		// get google service
+		$redditService = OAuth::consumer( 'Reddit' );
+
+		// check if code is valid
+
+		// if code is provided get user data and sign in
+		if ( !empty( $code ) ) {
+
+			// This was a callback request from google, get the token
+			$token = $redditService->requestAccessToken( $code );
+
+			// Send a request with it
+			$result = json_decode( $redditService->request( 'https://oauth.reddit.com/api/v1/me.json' ), true );
+
+
+			//Var_dump
+			//display whole array().
+			dd( $result );
+
+		}
+		// if not ask for permission first
+		else {
+			// get redditService authorization
+			$url = $redditService->getAuthorizationUri();
+			//dd( $url );
+			// return to facebook login url
+			return Redirect::to( (string)$url );
+		}
 	}
 }

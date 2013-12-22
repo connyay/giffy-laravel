@@ -21,10 +21,10 @@ return array(
 		/**
 		 * Facebook
 		 */
-        'Facebook' => array(
+        'Reddit' => array(
             'client_id'     => '',
-            'client_secret' => '',
-            'scope'         => array(),
+            'client_secret' => 'hvZFSQOBPf6LEV9aExAdp81lGEM',
+            'scope'         => array('identity'),
         ),
         'Twitter' => array(
             'client_id'     => 's4bprIQaDwv2SUXQHnq9A',

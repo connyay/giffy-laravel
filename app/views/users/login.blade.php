@@ -30,6 +30,7 @@ Log In
         </div>
         <a href="{{ URL::to('user/login/google') }}" class="btn btn-success btn-block">Login With Google</a>
         <a href="{{ URL::to('user/login/twitter') }}" class="btn btn-success btn-block">Login With Twitter</a>
+        <a href="{{ URL::to('user/login/reddit') }}" class="btn btn-success btn-block">Login With Reddit</a>
     </div>
 </div>
 

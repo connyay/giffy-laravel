@@ -1,8 +1,13 @@
 {
-	"repositories": [{
+	"repositories": [
+	{
 		"type": "vcs",
 		"url": "https://github.com/connyay/Thumb"
-	}],
+	},
+	{
+        "type": "vcs",
+        "url": "https://github.com/connyay/PHPoAuthLib"
+    }],
 	"require": {
 		"laravel/framework": "4.1.*",
 		"mews/thumb": "dev-master",

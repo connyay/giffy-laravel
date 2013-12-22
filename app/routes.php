@@ -45,6 +45,7 @@ Route::group( array( 'prefix' => 'user' ), function() use ( $giffyControllers ) 
 		Route::get( '/login', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@login' ) );
 		Route::get( '/login/google', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@loginWithGoogle' ) );
 		Route::get( '/login/twitter', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@loginWithTwitter' ) );
+		Route::get( '/login/reddit', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@loginWithReddit' ) );
 		Route::post( '/login', array( 'uses' => $giffyControllers.'UserController@doLogin' ) );
 		Route::get( '/logout', array( 'uses' => $giffyControllers.'UserController@logout' ) );
 	} );
