@@ -147,12 +147,18 @@ class UserController extends BaseController {
 
 		// get data from input
 		$code = Input::get( 'code' );
+		$state = Input::get( 'state' );
 
 		// get google service
 		$redditService = OAuth::consumer( 'Reddit' );
 
 		// if code is provided get user data and sign in
 		if ( !empty( $code ) ) {
+			if($state !== Session::token()) {
+				// CSRF!
+				echo "Uhm... Why did you do that? Knock it off.";
+				return;
+			}
 			// This was a callback request from reddit, get the token
 			$token = $redditService->requestAccessToken( $code );
 
