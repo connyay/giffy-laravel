@@ -10,6 +10,9 @@ class RoutesTest extends TestCase {
 		$this->call( 'GET', '/gifs' );
 		$this->assertResponseOk();
 
+		$this->call( 'GET', '/gifs/create' );
+		$this->assertResponseOk();
+
 		$this->call( 'GET', '/gifs/mine' );
 		$this->assertRedirectedTo( 'user/login' );
 	}
