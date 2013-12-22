@@ -19,6 +19,7 @@ class GiffyServiceProvider extends ServiceProvider {
 	 */
 	public function boot() {
 		$this->bindRepositories();
+		$this->bindFacades();
 	}
 
 	/**
@@ -30,6 +31,17 @@ class GiffyServiceProvider extends ServiceProvider {
 		$this->app->singleton( 'Giffy\Repositories\GifRepositoryInterface', 'Giffy\Repositories\DbGifRepository' );
 		$this->app->singleton( 'Giffy\Repositories\TagRepositoryInterface', 'Giffy\Repositories\DbTagRepository' );
 
+	}
+
+	/**
+	 * Bind facades.
+	 *
+	 * @return  void
+	 */
+	protected function bindFacades() {
+		$this->app->bind( 'Giffy', function() {
+				return new \Giffy\Facades\Giffy();
+			} );
 	}
 
 	public function register() {}

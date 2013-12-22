@@ -42,8 +42,9 @@ Route::group( array( 'prefix' => 'tags' ), function() use ( $giffyControllers ) 
 	} );
 
 Route::group( array( 'prefix' => 'user' ), function() use ( $giffyControllers ) {
+		Route::get( '/register', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@register' ) );
+		Route::post( '/register', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@doRegister' ) );
 		Route::get( '/login', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@login' ) );
-		Route::get( '/login/google', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@loginWithGoogle' ) );
 		Route::get( '/login/twitter', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@loginWithTwitter' ) );
 		Route::get( '/login/reddit', array( 'before' => 'guest', 'uses' => $giffyControllers.'UserController@loginWithReddit' ) );
 		Route::post( '/login', array( 'uses' => $giffyControllers.'UserController@doLogin' ) );

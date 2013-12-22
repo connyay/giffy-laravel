@@ -14,7 +14,7 @@ class AddTwitterIdToUserTable extends Migration {
 	{
 		Schema::table('users', function(Blueprint $table)
 		{
-			$table->integer('twitter_id')->after('password');
+			$table->integer('twitter_id')->after('password')->nullable();
 		});
 	}
 

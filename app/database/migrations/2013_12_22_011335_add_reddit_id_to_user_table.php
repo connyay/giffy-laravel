@@ -14,7 +14,7 @@ class AddRedditIdToUserTable extends Migration {
 	{
 		Schema::table('users', function(Blueprint $table)
 		{
-			$table->string('reddit_id', 10)->after('password');
+			$table->string('reddit_id', 10)->after('password')->nullable();
 		});
 	}
 

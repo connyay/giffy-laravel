@@ -176,6 +176,7 @@ return array(
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
 
+		'Giffy'           => 'Giffy\Facades\GiffyFacade',
 		'Thumb'    		  => 'Mews\Thumb\Facades\Thumb', // PHPThumb
 		'OAuth'			  => 'Artdarek\OAuth\Facade\OAuth', // OAuth
 	),
