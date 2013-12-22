@@ -182,7 +182,7 @@ class UserController extends BaseController {
 			$token = $redditService->requestAccessToken( $code );
 
 			// Send a request with it
-			$result = json_decode( $redditService->request( 'https://oauth.reddit.com/api/v1/me.json' ), true );
+			$result = json_decode( $redditService->request( 'https://oauth.reddit.com/api/v1/me.json' ) );
 
 			$user = User::where( 'reddit_id', '=', $result->id )->first();
 
@@ -211,7 +211,7 @@ class UserController extends BaseController {
 				Auth::login( $user );
 
 				// build message with some of the resultant data
-				$message = 'Your unique reddit user id is: ' . $result->id . ' and your name is ' . $result->name;
+				$message_success = 'Your unique reddit user id is: ' . $result->id . ' and your name is ' . $result->name;
 				$message_notice = 'Account Created.';
 
 				// redirect to game page
