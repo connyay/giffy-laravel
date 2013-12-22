@@ -1,6 +1,6 @@
 <?php namespace Giffy\Controllers;
 
-use View, Auth, Input, App, Redirect, Thumb, Request, Cache;
+use View, Auth, Input, Redirect, Thumb, Request, Cache, Response;
 use Giffy\Repositories\GifRepositoryInterface;
 use Giffy\Models\Gif;
 use Giffy\Models\Tag;
@@ -32,26 +32,24 @@ class GifController extends BaseController {
      */
     public function seed() {
         $array = (array) json_decode( file_get_contents( "http://www.reddit.com/r/reactiongifs/top/.json?sort=top&t=day&limit=100" ), true );
-        $i = 0;
-        foreach ( $array["data"]["children"] as $child ) {
-            $data = $child["data"];
-
-            if ( $data["domain"] === "i.imgur.com" ) {
-                $imageUrl = $data["url"];
+        $results = array( 'added'=>[], 'skipped'=>[], 'count' => 0 );
+        foreach ( $array['data']['children'] as $child ) {
+            $data = $child['data'];
+            if ( $data['domain'] === 'i.imgur.com' ) {
+                $imageUrl = $data['url'];
                 $exists = $this->gifs->exists( $imageUrl );
                 if ( $exists ) {
-                    echo "\nWe already have " . $imageUrl . " saved.\n";
+                    $results['skipped'][] = $imageUrl;
                     continue;
                 }
-
                 $this->gifs->create( $imageUrl );
-                $i++;
-                echo "\nAdded: " . $imageUrl ."\n";
+                $results['added'][] = $imageUrl;
+                $results['count']++;
             }
         }
-        echo "all done? added: " . $i . " images";
         Cache::tags( 'paginated-gifs' )->flush();
         $this->gifs->cleanDuplicates();
+        return Response::json( $results  );
     }
 
     /**
@@ -159,7 +157,7 @@ class GifController extends BaseController {
         $imageUrl = Input::get( 'url' );
         $url = parse_url( $imageUrl );
 
-        if ( !isset( $url["host"] ) || !isset( $url["path"] ) ) {
+        if ( !isset( $url['host'] ) || !isset( $url["path"] ) ) {
             return Redirect::to( 'gifs/create' )->with( 'error', 'What the heck was that?' )->withInput();
         }
 

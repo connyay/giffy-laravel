@@ -2,26 +2,26 @@
 
 App::before( function( $request ) {
 		//
-	} );
+} );
 
 
 App::after( function( $request, $response ) {
 		//
-	} );
+} );
 
 
 
 Route::filter( 'auth', function() {
-		if ( !Auth::check() ) {
-			return Redirect::to( 'user/login' )->with( 'error', 'Oops! You have to login to do that' );
-		}
-	} );
+	if ( !Auth::check() ) {
+		return Redirect::to( 'user/login' )->with( 'error', 'Oops! You have to login to do that' );
+	}
+} );
 
 Route::filter( 'guest', function() {
-		if ( Auth::check() ) {
-			return Redirect::to( '/' );
-		}
-	} );
+	if ( Auth::check() ) {
+		return Redirect::to( '/' );
+	}
+} );
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +35,7 @@ Route::filter( 'guest', function() {
 */
 
 Route::filter( 'csrf', function() {
-		if ( Session::token() != Input::get( '_token' ) ) {
-			throw new Illuminate\Session\TokenMismatchException;
-		}
-	} );
+	if ( Session::token() != Input::get( '_token' ) ) {
+		throw new Illuminate\Session\TokenMismatchException;
+	}
+} );

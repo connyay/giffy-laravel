@@ -39,7 +39,7 @@ class DbTagRepository implements TagRepositoryInterface {
 			return Tag::create( compact( 'name', 'user_id' ) );
 		} catch ( \Exception $e ) {
 			return Tag::where( "name", "=", $name )
-				->where( 'user_id', '=', $user_id )->first();
+			->where( 'user_id', '=', $user_id )->first();
 		}
 	}
 
@@ -47,7 +47,7 @@ class DbTagRepository implements TagRepositoryInterface {
 		$name = strtolower( $name );
 		$user_id = Auth::user()->id;
 		return Tag::where( "name", "=", $name )
-			->where( 'user_id', '=', $user_id )->first();
+		->where( 'user_id', '=', $user_id )->first();
 
 	}
 

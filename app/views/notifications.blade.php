@@ -1,11 +1,11 @@
 <script>
 var type = false,
-	message;
+message;
 @if (count($errors->all()) > 0)
 <div class="alert alert-error alert-block">
-	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	<h4>Error</h4>
-	Please check the form below for errors
+<button type="button" class="close" data-dismiss="alert">&times;</button>
+<h4>Error</h4>
+Please check the form below for errors
 </div>
 @endif
 @if ($message = Session::get('success'))

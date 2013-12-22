@@ -154,7 +154,7 @@ class UserController extends BaseController {
 
 		// if code is provided get user data and sign in
 		if ( !empty( $code ) ) {
-			if($state !== Session::token()) {
+			if ( $state !== Session::token() ) {
 				// CSRF!
 				echo "Uhm... Why did you do that? Knock it off.";
 				return;
