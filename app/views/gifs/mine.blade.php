@@ -21,13 +21,11 @@ All Gifs
 					<img class="img" src="{{{URL::to($gif->thumb)}}}" data-thumb-src="{{{URL::to($gif->thumb)}}}" data-full-src="{{{$gif->url}}}" />
 				</a>
 				<div class="caption">
-				
 					<p><a href="{{ URL::to('gifs', array('id'=>$gif->id)) }}" class="btn btn-success btn-block">Open</a></p>
-					@if (!Auth::guest()) 
+					@if (!Auth::guest())
 					<p><a href="{{ URL::to('gifs/mine', array('id'=>$gif->id)) }}" data-token="{{Session::token()}}" data-method="delete" class="btn btn-success btn-block">Remove From My Giffy</a></p>
 					@endif
 					<input type="text" class="form-control" value="{{{$gif->url}}}">
-					
 				</div>
 			</div>
 		</div>
@@ -35,7 +33,10 @@ All Gifs
 
 		@endforeach
 @else
-Couldn't find any gifs that belong to you... <a href="{{ URL::to('gifs') }}"> Browse some more?</a>
+
+<div class="col-md-4 col-md-offset-4 well">
+	Couldn't find any gifs that belong to you... <br><a href="{{ URL::to('gifs') }}"> Browse some more?</a>
+</div>
 @endif
 </div>
 
