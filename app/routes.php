@@ -13,6 +13,7 @@ Route::group( array( 'domain' => 'api.' . $domain ), function() use ( $giffyApiC
 		Route::get( '/tags/mine', array(  'uses' => $giffyApiControllers.'ApiTagController@mine' ) );
 		Route::post( '/tags/sync', array( 'uses' => $giffyApiControllers.'ApiTagController@sync' ) );
 		Route::get( '/gifs/mine', $giffyApiControllers.'ApiGifController@mine' );
+		Route::post( '/gifs/mine/{id}', $giffyApiControllers.'ApiGifController@addToMine' );
 		Route::get( '/gifs/{limit?}', $giffyApiControllers.'ApiGifController@fetch' );
 		Route::get( '/gifs/limit/{limit}', $giffyApiControllers.'ApiGifController@fetch' );
 		Route::get( '/gifs/limit/{limit}/offset/{offset}', $giffyApiControllers.'ApiGifController@fetch' );

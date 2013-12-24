@@ -53,4 +53,20 @@ class ApiGifController extends ApiController {
         }
         return $this->response( "gifs", $gifs->toArray(), 200, true );
     }
+
+    /**
+     * Add a gif to logged in users account
+     *
+     * @return Response
+     */
+    public function addToMine( $id ) {
+        $authorized = $this->authorize();
+        if ( !$authorized["is"] ) { return $authorized["message"]; }
+
+        if ( !Auth::user()->gifs->contains( $id ) ) {
+            Auth::user()->gifs()->attach( $id );
+            return $this->response( "message", "Gif saved successfully!", 200 );
+        }
+        return $this->response( "message", "Gif already saved.", 302 );
+    }
 }
