@@ -1,6 +1,6 @@
 <?php namespace Giffy\Controllers\Api;
 
-use Auth, Input;
+use Auth, Input, Giffy;
 use Giffy\Models\User;
 class ApiUserController extends ApiController {
 
@@ -35,7 +35,7 @@ class ApiUserController extends ApiController {
      */
     public function login() {
         $userdata = Input::only( 'username', 'password' );
-        if ( Auth::attempt( $userdata ) ) {
+        if ( Giffy::attempt( $userdata ) ) {
             $user = Auth::user();
             return $this->response( "user", array( "id"=>$user->id, "username"=>$user->username ), 200 );
         }
