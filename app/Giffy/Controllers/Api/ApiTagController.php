@@ -32,7 +32,7 @@ class ApiTagController extends ApiController {
      */
     public function all( ) {
         $tags = $this->tags->all( );
-        return Response::json( $tags->lists( "name" ) );
+        return Response::json( $tags->lists( 'name' ) );
     }
 
     /**
@@ -42,10 +42,10 @@ class ApiTagController extends ApiController {
      */
     public function mine( ) {
         $authorized = $this->authorize();
-        if ( !$authorized["is"] ) { return $authorized["message"]; }
+        if ( !$authorized['is'] ) { return $authorized['message']; }
 
         $tags = $this->tags->mine( );
-        return Response::json( $tags->lists( "name" ) );
+        return Response::json( $tags->lists( 'name' ) );
     }
 
     /**
@@ -55,16 +55,16 @@ class ApiTagController extends ApiController {
      */
     public function sync( ) {
         $authorized = $this->authorize();
-        if ( !$authorized["is"] ) { return $authorized["message"]; }
+        if ( !$authorized['is'] ) { return $authorized['message']; }
 
-        $gif_id = Input::get( "gif_id" );
-        $tags = Input::get( "tags" );
-        $message = "Failed Sync";
+        $gif_id = Input::get( 'gif_id' );
+        $tags = Input::get( 'tags' );
+        $message = 'Failed Sync';
         $status = 500;
         if ( $this->tags->syncGifTags( $gif_id, $tags ) ) {
-            $message = "Successful Sync";
+            $message = 'Successful Sync';
             $status = 200;
         }
-        return $this->response( "message", $message, $status );
+        return $this->response( 'message', $message, $status );
     }
 }

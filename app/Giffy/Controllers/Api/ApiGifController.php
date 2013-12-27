@@ -34,7 +34,7 @@ class ApiGifController extends ApiController {
         foreach ( $gifs as $gif ) {
             $gif->thumb = URL::to( $gif->thumb );
         }
-        return $this->response( "gifs", $gifs->toArray(), 200, true );
+        return $this->response( 'gifs', $gifs->toArray(), 200, true );
     }
 
     /**
@@ -44,14 +44,48 @@ class ApiGifController extends ApiController {
      */
     public function mine() {
         $authorized = $this->authorize();
-        if ( !$authorized["is"] ) { return $authorized["message"]; }
+        if ( !$authorized['is'] ) { return $authorized['message']; }
 
         $gifs = Auth::user()->gifs()->get( array( 'gifs.id', 'url', 'thumb' ) );
         foreach ( $gifs as $gif ) {
             $gif->thumb = URL::to( $gif->thumb );
             unset( $gif->pivot );
         }
-        return $this->response( "gifs", $gifs->toArray(), 200, true );
+        return $this->response( 'gifs', $gifs->toArray(), 200, true );
+    }
+
+    /**
+     * Display a listing of all the gifs with pages.
+     *
+     * @return Response
+     */
+    public function all() {
+        $gifs = $this->gifs->paginate( 12 );
+        $to = $gifs->getTo();
+        $from = $gifs->getFrom();
+        $current = $gifs->getCurrentPage();
+        $total = $gifs->getTotal();
+        $gifs = $gifs->getCollection()->toArray();
+
+        foreach ( $gifs as &$gif ) {
+            unset( $gif['created_at'], $gif['updated_at'] );
+            $gif['thumb'] = URL::to( $gif['thumb'] );
+        }
+        $results = [];
+        $results['total'] = $total;
+        $results['gifs'] = $gifs;
+        $results['prev_page'] = '';
+        $results['next_page'] = '';
+
+        if ( $current != $from ) {
+            $results['prev_page'] = route( 'gifs.api.all', array( 'page'=>$current - 1 ) );
+        }
+
+        if ( $current != $to ) {
+            $results['next_page'] = route( 'gifs.api.all', array( 'page'=>$current + 1 ) );
+        }
+
+        return $this->response( '', $results, 200 );
     }
 
     /**
@@ -61,12 +95,12 @@ class ApiGifController extends ApiController {
      */
     public function addToMine( $id ) {
         $authorized = $this->authorize();
-        if ( !$authorized["is"] ) { return $authorized["message"]; }
+        if ( !$authorized['is'] ) { return $authorized['message']; }
 
         if ( !Auth::user()->gifs->contains( $id ) ) {
             Auth::user()->gifs()->attach( $id );
-            return $this->response( "message", "Gif saved successfully!", 200 );
+            return $this->response( 'message', 'Gif saved successfully!', 200 );
         }
-        return $this->response( "message", "Gif already saved.", 302 );
+        return $this->response( 'message', 'Gif already saved.', 302 );
     }
 }

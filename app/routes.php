@@ -12,6 +12,7 @@ Route::group( array( 'domain' => 'api.' . $domain ), function() use ( $giffyApiC
 		Route::post( '/login', $giffyApiControllers.'ApiUserController@login' );
 		Route::get( '/tags/mine', array(  'uses' => $giffyApiControllers.'ApiTagController@mine' ) );
 		Route::post( '/tags/sync', array( 'uses' => $giffyApiControllers.'ApiTagController@sync' ) );
+		Route::get( '/gifs/all', array( 'as' =>'gifs.api.all', 'uses' => $giffyApiControllers.'ApiGifController@all' ) );
 		Route::get( '/gifs/mine', $giffyApiControllers.'ApiGifController@mine' );
 		Route::post( '/gifs/mine/{id}', $giffyApiControllers.'ApiGifController@addToMine' );
 		Route::get( '/gifs/{limit?}', $giffyApiControllers.'ApiGifController@fetch' );

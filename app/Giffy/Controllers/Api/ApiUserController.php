@@ -11,10 +11,10 @@ class ApiUserController extends ApiController {
      */
     public function me() {
         if ( Auth::guest() ) {
-            return $this->response( "user", array( "guest"=>true ), 401 );
+            return $this->response( 'user', array( 'guest'=>true ), 401 );
         } else {
             $user = Auth::user();
-            return $this->response( "user", array( "id"=>$user->id, "username"=>$user->username ), 200 );
+            return $this->response( 'user', array( 'id'=>$user->id, 'username'=>$user->username ), 200 );
         }
     }
 
@@ -25,7 +25,7 @@ class ApiUserController extends ApiController {
      */
     public function logout() {
         Auth::logout();
-        return $this->response( "message", "Logged out successfully", 200 );
+        return $this->response( 'message', 'Logged out successfully', 200 );
     }
 
     /**
@@ -37,9 +37,9 @@ class ApiUserController extends ApiController {
         $userdata = Input::only( 'username', 'password' );
         if ( Giffy::attempt( $userdata ) ) {
             $user = Auth::user();
-            return $this->response( "user", array( "id"=>$user->id, "username"=>$user->username ), 200 );
+            return $this->response( 'user', array( 'id'=>$user->id, 'username'=>$user->username ), 200 );
         }
         // That didn't work.
-        return $this->response( "message", "Couldn't login with provided credentials. Try again.", 401 );
+        return $this->response( 'message', 'Couldn\'t login with provided credentials. try again.', 401 );
     }
 }

@@ -12,9 +12,13 @@ class ApiController extends \Giffy\Controllers\BaseController {
         case 'application/json':
             $responseArray = [];
             if ( $count && is_array( $data ) ) {
-                $responseArray["count"] = count( $data );
+                $responseArray['count'] = count( $data );
             }
-            $responseArray[$dataKey] = $data;
+            if ( empty( $dataKey ) ) {
+                $responseArray = $data;
+            } else {
+                $responseArray[$dataKey] = $data;
+            }
             return Response::json( $responseArray, $status  );
             break;
 
@@ -26,12 +30,12 @@ class ApiController extends \Giffy\Controllers\BaseController {
 
     protected function authorize( ) {
         if ( Auth::guest() ) {
-            $message = $this->response( "message", "Login, yo!", 401 );
+            $message = $this->response( 'message', 'Login, yo!', 401 );
             $is = false;
         } else {
-            $message = $this->response( "message", "Authorized.", 200 );
+            $message = $this->response( 'message', 'Authorized.', 200 );
             $is = true;
         }
-        return array( "is"=> $is, "message"=>$message );
+        return array( 'is'=> $is, 'message'=>$message );
     }
 }
