@@ -61,8 +61,7 @@ class ApiGifController extends ApiController {
      */
     public function all() {
         $gifs = $this->gifs->paginate( 12 );
-        $to = $gifs->getTo();
-        $from = $gifs->getFrom();
+        $last = $gifs->getLastPage();
         $current = $gifs->getCurrentPage();
         $total = $gifs->getTotal();
         $gifs = $gifs->getCollection()->toArray();
@@ -77,11 +76,11 @@ class ApiGifController extends ApiController {
         $results['prev_page'] = '';
         $results['next_page'] = '';
 
-        if ( $current != $from ) {
+        if ( $current != 1 ) {
             $results['prev_page'] = route( 'gifs.api.all', array( 'page'=>$current - 1 ) );
         }
 
-        if ( $current != $to ) {
+        if ( $current != $last ) {
             $results['next_page'] = route( 'gifs.api.all', array( 'page'=>$current + 1 ) );
         }
 
