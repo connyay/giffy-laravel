@@ -1,6 +1,7 @@
 <?php namespace Giffy\Controllers;
 
-use View, Auth, Input, Redirect, Thumb, Request, Cache, Response;
+use View, Auth, Input, Redirect, DB,
+    Thumb, Request, Cache, Response;
 use Giffy\Repositories\GifRepositoryInterface;
 use Giffy\Models\Gif;
 use Giffy\Models\Tag;
@@ -31,6 +32,7 @@ class GifController extends BaseController {
      * @return Response
      */
     public function seed() {
+        DB::connection()->disableQueryLog();
         $array = (array) json_decode( file_get_contents( "http://www.reddit.com/r/reactiongifs/top/.json?sort=top&t=day&limit=100" ), true );
         $results = array( 'added'=>[], 'skipped'=>[], 'count' => 0 );
         foreach ( $array['data']['children'] as $child ) {
