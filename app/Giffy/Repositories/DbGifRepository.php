@@ -128,6 +128,7 @@ class DbGifRepository implements GifRepositoryInterface {
 
 	private function cleanURL( &$url ) {
 		$url = str_replace( ".jpg", ".gif", $url );
+		$url = str_replace( "https:", "http:", $url );
 		$url = explode( "?", $url );
 		$url = $url[0];
 		$url = str_finish( $url, '.gif' );
