@@ -1,4 +1,4 @@
-<?php
+<?php namespace Giffy\Commands;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
@@ -6,14 +6,14 @@ use Symfony\Component\Console\Input\InputArgument;
 
 use Giffy\Models\Gif;
 
-class GfyCommand extends Command {
+class GiffyGfyCatCommand extends Command {
 
 	/**
 	 * The console command name.
 	 *
 	 * @var string
 	 */
-	protected $name = 'gfy:make';
+	protected $name = 'giffy:gfycat';
 
 	/**
 	 * The console command description.
