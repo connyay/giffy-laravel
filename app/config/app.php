@@ -28,6 +28,7 @@ return array(
 
 	'url' => 'http://giffy.co',
 
+	'api_url' => 'http://api.giffy.co',
 	/*
 	|--------------------------------------------------------------------------
 	| Application Timezone

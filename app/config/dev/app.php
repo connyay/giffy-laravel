@@ -6,6 +6,8 @@ return array(
 
 	'url' => 'http://giffy.dev',
 
+	'api_url' => 'http://api.giffy.dev',
+
 	'providers' => array(
 
 		'Illuminate\Foundation\Providers\ArtisanServiceProvider',
