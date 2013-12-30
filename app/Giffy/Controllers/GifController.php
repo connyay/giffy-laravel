@@ -1,6 +1,6 @@
 <?php namespace Giffy\Controllers;
 
-use View, Auth, Input, Redirect, DB,
+use View, Auth, Input, Redirect, Artisan,
     Thumb, Request, Cache, Response;
 use Giffy\Repositories\GifRepositoryInterface;
 use Giffy\Models\Gif;
@@ -32,26 +32,8 @@ class GifController extends BaseController {
      * @return Response
      */
     public function seed() {
-        DB::connection()->disableQueryLog();
-        $array = (array) json_decode( file_get_contents( "http://www.reddit.com/r/reactiongifs/top/.json?sort=top&t=day&limit=100" ), true );
-        $results = array( 'added'=>[], 'skipped'=>[], 'count' => 0 );
-        foreach ( $array['data']['children'] as $child ) {
-            $data = $child['data'];
-            if ( $data['domain'] === 'i.imgur.com' ) {
-                $imageUrl = $data['url'];
-                $exists = $this->gifs->exists( $imageUrl );
-                if ( $exists ) {
-                    $results['skipped'][] = $imageUrl;
-                    continue;
-                }
-                $this->gifs->create( $imageUrl );
-                $results['added'][] = $imageUrl;
-                $results['count']++;
-            }
-        }
-        Cache::tags( 'paginated-gifs' )->flush();
-        $this->gifs->cleanDuplicates();
-        return Response::json( $results  );
+        Artisan::call('giffy:feed');
+        return 'Seed completed.';
     }
 
     /**

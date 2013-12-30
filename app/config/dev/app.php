@@ -34,6 +34,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
+		'Illuminate\Foundation\Providers\PublisherServiceProvider',
 
 		'Artdarek\OAuth\OAuthServiceProvider',
 		'Mews\Thumb\ThumbServiceProvider',

@@ -31,6 +31,14 @@ class GiffyServiceProvider extends ServiceProvider {
 		$this->app->singleton( 'Giffy\Repositories\GifRepositoryInterface', 'Giffy\Repositories\DbGifRepository' );
 		$this->app->singleton( 'Giffy\Repositories\TagRepositoryInterface', 'Giffy\Repositories\DbTagRepository' );
 
+        $this->app['giffy:feed'] = $this->app->share(function($app)
+        {
+            return new \Giffy\Commands\GiffyFeedCommand(
+                    $app['Giffy\Repositories\GifRepositoryInterface']
+                );
+        });
+
+        $this->commands('giffy:feed');
 	}
 
 	/**
@@ -52,7 +60,7 @@ class GiffyServiceProvider extends ServiceProvider {
 	 * @return array
 	 */
 	public function provides() {
-		return array();
+		return array('giffy.feed');
 	}
 
 }
