@@ -23,6 +23,8 @@
     "grunt-contrib-watch": "~0.5.1",
     "grunt-notify": "~0.2.4",
     "grunt-phpunit": "~0.3.0",
-    "grunt-php-cs-fixer": "0.0.4"
-  }
+    "grunt-php-cs-fixer": "0.0.4",
+    "pre-git": "0.0.14"
+  },
+  "pre-commit": "grunt phpcsfixer"
 }
