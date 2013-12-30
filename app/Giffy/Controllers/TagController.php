@@ -4,8 +4,8 @@ use Input;
 use Illuminate\Support\Facades\Response;
 use Giffy\Repositories\TagRepositoryInterface;
 
-class TagController extends BaseController {
-
+class TagController extends BaseController
+{
     /**
      * The tag repository implementation.
      *
@@ -20,35 +20,44 @@ class TagController extends BaseController {
      *
      * @return TagController
      */
-    public function __construct( TagRepositoryInterface $tags ) {
+    public function __construct(TagRepositoryInterface $tags)
+    {
         $this->tags = $tags;
     }
 
-    public function save() {
+    public function save()
+    {
         $tagName = Input::get( 'name' );
         $this->tags->create( $tagName );
     }
 
-    public function mine() {
+    public function mine()
+    {
         $tags = $this->tags->mine( );
+
         return Response::json( $tags->lists( "name" ) );
     }
 
-    public function add() {
+    public function add()
+    {
         $gif_id = Input::get( "gif_id" );
         $tag = Input::get( "tag" );
         $this->tags->add( $gif_id, $tag );
+
         return Response::json( "Added " . $tag );
     }
 
-    public function remove() {
+    public function remove()
+    {
         $gif_id = Input::get( "gif_id" );
         $tag = Input::get( "tag" );
         $this->tags->remove( $gif_id, $tag );
+
         return Response::json( "Removed " . $tag );
     }
 
-    public function sync( ) {
+    public function sync()
+    {
         $gif_id = Input::get( "gif_id" );
         $tags = Input::get( "tags" );
         $this->tags->syncGifTags( $gif_id, $tags );

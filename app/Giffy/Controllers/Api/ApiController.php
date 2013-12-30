@@ -3,12 +3,13 @@
 use Auth;
 use Illuminate\Support\Facades\Response;
 
-class ApiController extends \Giffy\Controllers\BaseController {
-
+class ApiController extends \Giffy\Controllers\BaseController
+{
     private $content_type = 'application/json';
 
-    protected function response( $dataKey, $data, $status, $count = false ) {
-        switch ( $this->content_type ) {
+    protected function response($dataKey, $data, $status, $count = false)
+    {
+        switch ($this->content_type) {
         case 'application/json':
             $responseArray = [];
             if ( $count && is_array( $data ) ) {
@@ -19,6 +20,7 @@ class ApiController extends \Giffy\Controllers\BaseController {
             } else {
                 $responseArray[$dataKey] = $data;
             }
+
             return Response::json( $responseArray, $status  );
             break;
 
@@ -28,7 +30,8 @@ class ApiController extends \Giffy\Controllers\BaseController {
         }
     }
 
-    protected function authorize( ) {
+    protected function authorize()
+    {
         if ( Auth::guest() ) {
             $message = $this->response( 'message', 'Login, yo!', 401 );
             $is = false;
@@ -36,6 +39,7 @@ class ApiController extends \Giffy\Controllers\BaseController {
             $message = $this->response( 'message', 'Authorized.', 200 );
             $is = true;
         }
+
         return array( 'is'=> $is, 'message'=>$message );
     }
 }

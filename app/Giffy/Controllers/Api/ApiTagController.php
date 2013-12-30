@@ -2,11 +2,10 @@
 
 use Auth, Input;
 use Giffy\Repositories\TagRepositoryInterface;
-use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Response;
 
-class ApiTagController extends ApiController {
-
+class ApiTagController extends ApiController
+{
     /**
      * The tag repository implementation.
      *
@@ -21,7 +20,8 @@ class ApiTagController extends ApiController {
      *
      * @return ApiTagController
      */
-    public function __construct( TagRepositoryInterface $tags ) {
+    public function __construct(TagRepositoryInterface $tags)
+    {
         $this->tags = $tags;
     }
 
@@ -30,8 +30,10 @@ class ApiTagController extends ApiController {
      *
      * @return Response
      */
-    public function all( ) {
+    public function all()
+    {
         $tags = $this->tags->all( );
+
         return Response::json( $tags->lists( 'name' ) );
     }
 
@@ -40,11 +42,13 @@ class ApiTagController extends ApiController {
      *
      * @return Response
      */
-    public function mine( ) {
+    public function mine()
+    {
         $authorized = $this->authorize();
-        if ( !$authorized['is'] ) { return $authorized['message']; }
+        if (!$authorized['is']) { return $authorized['message']; }
 
         $tags = $this->tags->mine( );
+
         return Response::json( $tags->lists( 'name' ) );
     }
 
@@ -53,9 +57,10 @@ class ApiTagController extends ApiController {
      *
      * @return Response
      */
-    public function sync( ) {
+    public function sync()
+    {
         $authorized = $this->authorize();
-        if ( !$authorized['is'] ) { return $authorized['message']; }
+        if (!$authorized['is']) { return $authorized['message']; }
 
         $gif_id = Input::get( 'gif_id' );
         $tags = Input::get( 'tags' );
@@ -65,6 +70,7 @@ class ApiTagController extends ApiController {
             $message = 'Successful Sync';
             $status = 200;
         }
+
         return $this->response( 'message', $message, $status );
     }
 }

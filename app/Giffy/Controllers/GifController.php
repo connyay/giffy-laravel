@@ -6,8 +6,8 @@ use Giffy\Repositories\GifRepositoryInterface;
 use Giffy\Models\Gif;
 use Giffy\Models\Tag;
 
-class GifController extends BaseController {
-
+class GifController extends BaseController
+{
     /**
      * The gif repository implementation.
      *
@@ -22,7 +22,8 @@ class GifController extends BaseController {
      *
      * @return GifController
      */
-    public function __construct( GifRepositoryInterface $gifs ) {
+    public function __construct(GifRepositoryInterface $gifs)
+    {
         $this->gifs = $gifs;
     }
 
@@ -31,8 +32,10 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function seed() {
+    public function seed()
+    {
         Artisan::call('giffy:feed');
+
         return 'Seed completed.';
     }
 
@@ -41,7 +44,8 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function index() {
+    public function index()
+    {
         $gifs = $this->gifs->paginate( 12 );
         // Show the page
         return View::make( 'gifs.index', compact( 'gifs' ) );
@@ -52,7 +56,8 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function show( $id ) {
+    public function show($id)
+    {
         // Get the gif
         $gif = $this->gifs->find( $id );
         // Show the page
@@ -64,13 +69,15 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function mine( $id = null ) {
-
+    public function mine($id = null)
+    {
         if ( isset( $id ) ) {
             if ( !Auth::user()->gifs->contains( $id ) ) {
                 Auth::user()->gifs()->attach( $id );
+
                 return Redirect::back()->with( 'success', 'Your Giffy Saved!' );
             }
+
             return Redirect::back()->with( 'warning', 'You already had that one, man.' );
         }
         // Get all the users gifs
@@ -84,14 +91,15 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function tagged( $tag ) {
+    public function tagged($tag)
+    {
         $gifs = $this->gifs->tagged( $tag );
         // Show the page
         return View::make( 'gifs.index', compact( 'gifs' ) );
     }
 
-
-    public function editTag( $id ) {
+    public function editTag($id)
+    {
         $gif = $this->gifs->find( $id );
         $name = Input::get( 'name' );
         if ( Request::getMethod() == 'DELETE' ) {
@@ -104,22 +112,29 @@ class GifController extends BaseController {
             $tag = Tag::create( compact( 'name', 'user_id' ) );
             $gif->userTags()->attach( $tag->id );
         }
+
         return View::make( 'gifs.view', compact( 'gif' ) );
     }
 
-    public function addToMine( $id ) {
+    public function addToMine($id)
+    {
         if ( !Auth::user()->gifs->contains( $id ) ) {
             Auth::user()->gifs()->attach( $id );
+
             return Redirect::back()->with( 'success', 'Your Giffy Saved!' );
         }
+
         return Redirect::back()->with( 'warning', 'You already had that one, man.' );
     }
 
-    public function removeFromMine( $id ) {
+    public function removeFromMine($id)
+    {
         if ( Auth::user()->gifs->contains( $id ) ) {
             Auth::user()->gifs()->detach( $id );
+
             return Redirect::back()->with( 'success', 'Your Giffy Removed!' );
         }
+
         return Redirect::back()->with( 'warning', 'You didn\'t have that one... wat.' );
     }
 
@@ -128,7 +143,8 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function create() {
+    public function create()
+    {
         return View::make( 'gifs.create' );
     }
 
@@ -137,7 +153,8 @@ class GifController extends BaseController {
      *
      * @return Response
      */
-    public function store() {
+    public function store()
+    {
         $imageUrl = Input::get( 'url' );
         $url = parse_url( $imageUrl );
 
@@ -145,16 +162,17 @@ class GifController extends BaseController {
             return Redirect::to( 'gifs/create' )->with( 'error', 'What the heck was that?' )->withInput();
         }
 
-        if ( $url["host"] !== "i.imgur.com" ) {
+        if ($url["host"] !== "i.imgur.com") {
             return Redirect::to( 'gifs/create' )->with( 'error', 'How about an i.imgur.com link?' )->withInput();
         }
         $exists = $this->gifs->exists( $imageUrl );
-        if ( $exists ) {
+        if ($exists) {
             return Redirect::to( 'gifs/create' )->with( 'error', 'We already have that gif.' )->withInput();
         }
 
         if ( $this->gifs->create( $imageUrl ) ) {
             Cache::tags( 'paginated-gifs' )->flush();
+
             return Redirect::to( 'gifs' )->with( 'success', 'Gif Saved!' );
         } else {
             return Redirect::to( 'gifs/create' )->with( 'error', 'Oops! There was a problem saving the gif.' )->withInput();
