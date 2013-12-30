@@ -7,6 +7,7 @@ return array(
 	'url' => 'http://giffy.dev',
 
 	'api_url' => 'http://api.giffy.dev',
+	'api_domain' => 'api.giffy.dev',
 
 	'providers' => array(
 
