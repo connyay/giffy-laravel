@@ -1,5 +1,5 @@
 <?php
-$apiDomain = Config::get( 'app.api_url' );
+$apiDomain = Config::get( 'app.api_domain' );
 
 Route::group( array( 'domain' => $apiDomain, 'namespace' => 'Giffy\Controllers\Api' ), function() {
 		Route::get( '/me', 'ApiUserController@me' );
