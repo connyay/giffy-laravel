@@ -8,11 +8,3 @@ composer.lock
 /app/config/defaultMailConfig.php
 .DS_Store
 /node_modules
-/app/assets/node_modules
-/app/assets/node_modules
-/app/assets/node_modules
-/app/assets/node_modules
-/app/assets/node_modules
-/app/assets/node_modules
-/app/assets/node_modules
-/app/assets/node_modules
