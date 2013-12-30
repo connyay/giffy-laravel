@@ -4,7 +4,5 @@
 /public/packages
 composer.phar
 composer.lock
-/app/config/sendGridConfig.php
-/app/config/defaultMailConfig.php
 .DS_Store
 /node_modules
