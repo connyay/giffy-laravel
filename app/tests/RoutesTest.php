@@ -1,27 +1,29 @@
 <?php
 
-class RoutesTest extends TestCase {
+class RoutesTest extends TestCase
+{
+    public function testGifRoutes()
+    {
+        Route::enableFilters();
+        $this->call( 'GET', '/' );
+        $this->assertResponseOk();
 
-	public function testGifRoutes() {
-		Route::enableFilters();
-		$this->call( 'GET', '/' );
-		$this->assertResponseOk();
+        $this->call( 'GET', '/gifs' );
+        $this->assertResponseOk();
 
-		$this->call( 'GET', '/gifs' );
-		$this->assertResponseOk();
+        $this->call( 'GET', '/gifs/create' );
+        $this->assertResponseOk();
 
-		$this->call( 'GET', '/gifs/create' );
-		$this->assertResponseOk();
+        $this->call( 'GET', '/gifs/mine' );
+        $this->assertRedirectedTo( 'user/login' );
+    }
 
-		$this->call( 'GET', '/gifs/mine' );
-		$this->assertRedirectedTo( 'user/login' );
-	}
+    public function testUserRoutes()
+    {
+        $this->call( 'GET', '/user/login' );
+        $this->assertResponseOk();
 
-	public function testUserRoutes() {
-		$this->call( 'GET', '/user/login' );
-		$this->assertResponseOk();
-
-		$this->call( 'GET', '/user/register' );
-		$this->assertResponseOk();
-	}
+        $this->call( 'GET', '/user/register' );
+        $this->assertResponseOk();
+    }
 }

@@ -24,16 +24,16 @@ message = "{{ $message }}";
 type = "info";
 message = "{{ $message }}";
 @endif
-if(type) {
-	$.bootstrapGrowl(message, {
-	    ele: 'body', // which element to append to
-	    type: type,
-	    offset: {from: 'top', amount: 50}, // 'top', or 'bottom'
-	    align: 'center', // ('left', 'right', or 'center')
-	    width: 'auto', // (integer, or 'auto')
-	    delay: 5000,
-	    allow_dismiss: true,
-	    stackup_spacing: 10 // spacing between consecutively stacked growls.
-	});
+if (type) {
+    $.bootstrapGrowl(message, {
+        ele: 'body', // which element to append to
+        type: type,
+        offset: {from: 'top', amount: 50}, // 'top', or 'bottom'
+        align: 'center', // ('left', 'right', or 'center')
+        width: 'auto', // (integer, or 'auto')
+        delay: 5000,
+        allow_dismiss: true,
+        stackup_spacing: 10 // spacing between consecutively stacked growls.
+    });
 }
 </script>

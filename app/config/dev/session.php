@@ -2,6 +2,6 @@
 
 return array(
 
-	'domain' => '.giffy.dev',
+    'domain' => '.giffy.dev',
 
 );

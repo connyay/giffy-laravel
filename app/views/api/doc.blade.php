@@ -184,7 +184,7 @@
         }
     ]
 }}</pre>
-<h3><small>GET</small> {{$route}}gifs/{limit} <small>or</small> {{$route}}gifs/limit/{limit}</h3> 
+<h3><small>GET</small> {{$route}}gifs/{limit} <small>or</small> {{$route}}gifs/limit/{limit}</h3>
 
                      <table class="table table-bordered table-condensed table-striped">
                         <tbody>
@@ -225,8 +225,8 @@
             "thumb": "http://giffy.co/thumbs/bTlIioQ.gif"
         }
     ]
-}}</pre>   
-<h3><small>GET</small> {{$route}}gifs/limit/{limit}/offset/{offset}</h3> 
+}}</pre>
+<h3><small>GET</small> {{$route}}gifs/limit/{limit}/offset/{offset}</h3>
 
                      <table class="table table-bordered table-condensed table-striped">
                         <tbody>
@@ -264,7 +264,7 @@
             "thumb": "http://giffy.co/thumbs/bTlIioQ.gif"
         }
     ]
-}}</pre>                
+}}</pre>
                   </div>
                   <div class="col-md-7">
                      <div class="page-header">
@@ -278,7 +278,7 @@
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
       <script src="{{ asset('js/bootstrap.min.js') }}"></script>
       <script>
-         $("#menu-toggle").click(function(e) {
+         $("#menu-toggle").click(function (e) {
              e.preventDefault();
              $("#wrapper").toggleClass("active");
          });

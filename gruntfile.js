@@ -105,8 +105,8 @@ module.exports = function (grunt) {
 		// Minify and concatenate CSS files
 		cssmin: {
 			minify: {
-	       		src: '<%= options.css.concat %>',
-	        	dest: '<%= options.css.min %>'
+				src: '<%= options.css.concat %>',
+				dest: '<%= options.css.min %>'
 			}
 		},
 
@@ -140,20 +140,20 @@ module.exports = function (grunt) {
 
 		// Compile SASS files
 		sass: {
-		    main: {
-		        files: {
-		        	'<%= options.sass.compiled %>': '<%= options.sass.file %>'
-		        }
-		    }
+			main: {
+				files: {
+					'<%= options.sass.compiled %>': '<%= options.sass.file %>'
+				}
+			}
 		},
 
 		// Compile STYLUS files
 		stylus: {
-		    main: {
-		        files: {
-		        	'<%= options.stylus.compiled %>': '<%= options.stylus.file %>'
-		        }
-		    }
+			main: {
+				files: {
+					'<%= options.stylus.compiled %>': '<%= options.stylus.file %>'
+				}
+			}
 		},
 
 		// Display notifications
@@ -184,8 +184,16 @@ module.exports = function (grunt) {
 			},
 			files: '<%= options.watch.files %>',
 			tasks: ['default', 'notify:watch']
-		}
+		},
 
+		phpcsfixer: {
+			app: {
+				dir: 'app'
+			},
+			options: {
+				bin: '/usr/local/bin/php-cs-fixer',
+			}
+		},
 
 	});
 
@@ -202,7 +210,8 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-notify');
+	grunt.loadNpmTasks('grunt-php-cs-fixer');
 
 	// Register tasks
-	grunt.registerTask('default', ['clean:all', 'less',  'concat:css', 'concat:js', 'cssmin', 'uglify', 'clean:concat']); // Default task
+	grunt.registerTask('default', ['clean:all', 'less',  'concat:css', 'concat:js', 'cssmin', 'uglify', 'clean:concat', 'phpcsfixer']); // Default task
 }
