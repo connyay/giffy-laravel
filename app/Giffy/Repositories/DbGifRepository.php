@@ -26,7 +26,7 @@ class DbGifRepository implements GifRepositoryInterface
     public function paginate($per_page)
     {
         $per_page = is_numeric( $per_page ) ? $per_page : 12;
-        $query = Gif::rememberForever()->cacheTags( 'paginated-gifs' )->orderBy( 'id', 'DESC' );
+        $query = Gif::select( 'id', 'url', 'thumb' )->rememberForever()->cacheTags( 'paginated-gifs' )->orderBy( 'id', 'DESC' );
         // Eager load user relationship if user is logged in.
         if ( Auth::check() ) {
             $query->with( 'users' );
