@@ -24,7 +24,7 @@ Route::group( array( 'prefix' => 'gifs', 'namespace' => 'Giffy\Controllers' ), f
         Route::get( '/mine', array( 'before' => 'auth', 'uses' => 'GifController@mine' ) );
         Route::post( '/mine/{gif_id}', array( 'before' => 'auth', 'uses' => 'GifController@addToMine' ) );
         Route::delete( '/mine/{gif_id}', array( 'before' => 'auth', 'uses' => 'GifController@removeFromMine' ) );
-        Route::get( '/create', array( 'uses' => 'GifController@create' ) );
+        Route::get( '/create', array( 'before' => 'admin', 'uses' => 'GifController@create' ) );
         Route::get( '/seed', array( 'uses' => 'GifController@seed' ) );
         Route::get( '/tag/{tag}', array( 'uses' => 'GifController@tagged' ) );
         Route::get( '/{gif_id}', array( 'uses' => 'GifController@show' ) );

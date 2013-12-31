@@ -39,6 +39,16 @@ class User extends BaseModel implements UserInterface
         return $this->password;
     }
 
+    /**
+     * Determines if the user has admin rights.
+     *
+     * @return string
+     */
+    public function isAdmin()
+    {
+        return $this->super_user;
+    }
+
     public function gifs()
     {
         return $this->belongsToMany( 'Giffy\Models\Gif' )->withTimestamps()->orderBy( 'gif_user.id', 'DESC' );

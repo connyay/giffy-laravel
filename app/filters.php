@@ -14,6 +14,12 @@ Route::filter( 'auth', function () {
     }
 } );
 
+Route::filter( 'admin', function () {
+    if ( !Auth::check() || !Auth::user()->isAdmin() ) {
+        return Redirect::back()->with( 'error', 'Oops! You don\'t have permission to do that' );
+    }
+} );
+
 Route::filter( 'guest', function () {
     if ( Auth::check() ) {
         return Redirect::to( '/' );

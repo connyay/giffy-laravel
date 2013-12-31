@@ -34,7 +34,9 @@
    <li {{ (Request::is('gifs') ? 'class="active"' : '') }}><a href="{{ URL::to('gifs') }}">View All</a></li>
    @if (!Auth::guest())
    <li {{ (Request::is('gifs/mine') ? 'class="active"' : '') }}><a href="{{ URL::to('gifs/mine') }}">View Mine</a></li>
+   @if (Auth::user()->isAdmin())
    <li {{ (Request::is('gifs/create') ? 'class="active"' : '') }}><a href="{{ URL::to('gifs/create') }}">Create</a></li>
+   @endif
    @endif
    </ul>
    <ul class="nav navbar-nav navbar-right">
