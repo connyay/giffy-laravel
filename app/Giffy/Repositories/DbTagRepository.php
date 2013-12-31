@@ -19,6 +19,22 @@ class DbTagRepository implements TagRepositoryInterface
     }
 
     /**
+     * Get a Tag by its name.
+     *
+     * @param  string $name
+     * @return Tag
+     */
+    public function find($name)
+    {
+        $name = strtolower( $name );
+        $user_id = Auth::user()->id;
+
+        return Tag::where( "name", "=", $name )
+        ->where( 'user_id', '=', $user_id )->first();
+
+    }
+
+    /**
      * Get all of the users tags.
      *
      * @return array
@@ -48,30 +64,36 @@ class DbTagRepository implements TagRepositoryInterface
         }
     }
 
-    public function find($name)
-    {
-        $name = strtolower( $name );
-        $user_id = Auth::user()->id;
-
-        return Tag::where( "name", "=", $name )
-        ->where( 'user_id', '=', $user_id )->first();
-
-    }
-
+    /**
+     * Adds a tag to the gif with the provided id.
+     *
+     * @param  int    $gif_id
+     * @param  string $tag
+     * @return Tag
+     */
     public function add($gif_id, $tag)
     {
+        $tag = $this->create( $tag );
         $gif = Gif::find( $gif_id );
-        $gif->tags()->attach( $this->create( $tag )->id );
+        $gif->tags()->attach( $tag->id );
 
-        return true;
+        return $tag;
     }
 
+    /**
+     * Removes a tag from the gif with the provided id.
+     *
+     * @param  int    $gif_id
+     * @param  string $tag
+     * @return Tag
+     */
     public function remove($gif_id, $tag)
     {
+        $tag = $this->find( $tag );
         $gif = Gif::find( $gif_id );
-        $gif->tags()->detach( $this->find( $tag )->id );
+        $gif->tags()->detach( $tag->id );
 
-        return true;
+        return $tag;
     }
     /**
      * Syncs the gif and tag relationships
