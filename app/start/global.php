@@ -11,14 +11,14 @@
 |
 */
 
-ClassLoader::addDirectories(array(
+ClassLoader::addDirectories( array(
 
-    app_path().'/commands',
-    app_path().'/Giffy',
-    app_path().'/database/seeds',
-    app_path().'/libraries'
+        app_path().'/commands',
+        app_path().'/Giffy',
+        app_path().'/database/seeds',
+        app_path().'/libraries'
 
-));
+    ) );
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ ClassLoader::addDirectories(array(
 
 $logFile = 'log-'.php_sapi_name().'.txt';
 
-Log::useDailyFiles(storage_path().'/logs/'.$logFile);
+Log::useDailyFiles( storage_path().'/logs/'.$logFile );
 
 /*
 |--------------------------------------------------------------------------
@@ -48,9 +48,24 @@ Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 |
 */
 
-App::error(function (Exception $exception, $code) {
-    Log::error($exception);
-});
+App::error( function (Exception $exception, $code) {
+        Log::error( $exception );
+    } );
+
+/*
+|--------------------------------------------------------------------------
+| Maintenance Mode Handler
+|--------------------------------------------------------------------------
+|
+| The "down" Artisan command gives you the ability to put an application
+| into maintenance mode. Here, you will define what is displayed back
+| to the user if maintenace mode is in effect for this application.
+|
+*/
+
+App::down( function () {
+        return Response::make( "Be right back!", 503 );
+    } );
 
 /*
 |--------------------------------------------------------------------------
