@@ -41,9 +41,7 @@ class DbTagRepository implements TagRepositoryInterface
      */
     public function mine()
     {
-        $user_id = Auth::user()->id;
-
-        return Tag::orderBy( 'id', 'DESC' )->where( 'user_id', $user_id )->get();
+        return Auth::user()->tags()->get();
     }
 
     /**
