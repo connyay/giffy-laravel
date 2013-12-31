@@ -10,10 +10,12 @@ class UsersTableSeeder extends Seeder
                 array(
                     'username' => 'admin',
                     'password' => Hash::make('123456'),
+                    'super_user' => true,
                 ),
                 array(
                     'username' => 'user',
                     'password' => Hash::make('123456'),
+                    'super_user' => false,
                 ),
             );
 
