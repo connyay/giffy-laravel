@@ -1,6 +1,6 @@
 <?php namespace Giffy\Controllers;
 
-use Input;
+use Input, Cache;
 use Illuminate\Support\Facades\Response;
 use Giffy\Repositories\TagRepositoryInterface;
 
@@ -43,6 +43,7 @@ class TagController extends BaseController
         $gif_id = Input::get( "gif_id" );
         $tag = Input::get( "tag" );
         $this->tags->add( $gif_id, $tag );
+        Cache::tags( 'tags' )->flush();
 
         return Response::json( "Added " . $tag );
     }
@@ -52,6 +53,7 @@ class TagController extends BaseController
         $gif_id = Input::get( "gif_id" );
         $tag = Input::get( "tag" );
         $this->tags->remove( $gif_id, $tag );
+        Cache::tags( 'tags' )->flush();
 
         return Response::json( "Removed " . $tag );
     }
