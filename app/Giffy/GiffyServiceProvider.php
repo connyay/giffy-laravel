@@ -20,6 +20,7 @@ class GiffyServiceProvider extends ServiceProvider
     {
         $this->bindRepositories();
         $this->bindFacades();
+        $this->bindRoutes();
     }
 
     /**
@@ -51,6 +52,16 @@ class GiffyServiceProvider extends ServiceProvider
         $this->app->bind( 'Giffy', function () {
                 return new \Giffy\Facades\Giffy();
             } );
+    }
+
+    /**
+     * Bind routes.
+     *
+     * @return void
+     */
+    protected function bindRoutes()
+    {
+        require __DIR__ . '/Routes/ApiRoutes.php';
     }
 
     public function register() {}
