@@ -11,5 +11,4 @@
 |
 */
 
-Artisan::add(new Giffy\Commands\GiffyGfyCatCommand);
-//Artisan::add(new Giffy\Commands\GiffyFeedCommand);
+Artisan::add( new Giffy\Commands\GiffyGfyCatCommand );
