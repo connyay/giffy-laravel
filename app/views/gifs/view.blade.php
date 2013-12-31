@@ -10,15 +10,15 @@ Gif
 @section('content')
 
 <div class="thumbnail well">
-    <img class="img" src="{{{URL::to($gif->url)}}}" />
+    {{ $gif->image }}
     <div class="caption">
-
-        @if (!Auth::guest())
-        <p><a href="{{ URL::to('gifs/mine', array('id'=>$gif->id)) }}" {{$gif->users->contains(Auth::user()->id) ? "disabled" : ""}} data-token="{{Session::token()}}" data-method="post" class="btn btn-success btn-block">Add To My Giffy</a></p>
-        <input type="text" class="form-control tags" data-role="tagsinput" placeholder="Enter Gif Tags" value="{{ implode(',', $gif->userTags()->lists("name")) }}">
+        @if ( !Auth::guest() )
+        <p>
+            {{ $gif->savelink }}
+        </p>
+        {{ $gif->usertags }}
         @endif
-        <input type="text" class="form-control" value="{{{$gif->url}}}">
-
+        {{ $gif->imgur }}
     </div>
 </div>
 

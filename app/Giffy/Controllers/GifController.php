@@ -59,7 +59,7 @@ class GifController extends BaseController
     public function show($id)
     {
         // Get the gif
-        $gif = $this->gifs->find( $id );
+        $gif = $this->gifs->find( $id )->getPresenter();
         // Show the page
         return View::make( 'gifs.view', compact( 'gif' ) );
     }

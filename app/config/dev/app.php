@@ -41,6 +41,7 @@ return array(
 
         'Artdarek\OAuth\OAuthServiceProvider',
         'Mews\Thumb\ThumbServiceProvider',
+        'Robbo\Presenter\PresenterServiceProvider',
         'Giffy\GiffyServiceProvider',
         'JasonNZ\LaravelGrunt\LaravelGruntServiceProvider',
         'Barryvdh\Debugbar\ServiceProvider',

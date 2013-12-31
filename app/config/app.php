@@ -111,6 +111,7 @@ return array(
 
         'Mews\Thumb\ThumbServiceProvider', // PHPThumb
         'Artdarek\OAuth\OAuthServiceProvider',
+        'Robbo\Presenter\PresenterServiceProvider',
         'Giffy\GiffyServiceProvider',
     ),
 

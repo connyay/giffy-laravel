@@ -1,5 +1,7 @@
 <?php namespace Giffy\Models;
 use Auth;
+use Giffy\Presenters\GifPresenter;
+
 class Gif extends BaseModel
 {
     protected $fillable = array( 'url', 'thumb' );
@@ -17,5 +19,10 @@ class Gif extends BaseModel
     public function userTags()
     {
         return $this->tags()->where( 'tags.user_id', Auth::user()->id );
+    }
+
+    public function getPresenter()
+    {
+        return new GifPresenter($this);
     }
 }

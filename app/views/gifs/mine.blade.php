@@ -12,18 +12,20 @@ All Gifs
 <div class="row">
     @if(sizeof($gifs) > 0)
     @foreach ($gifs as $gif)
-
+    @if($gif = $gif->getPresenter()) @endif
     <div class="col-sm-6 col-xs-12 col-md-3 col-lg-3 giffy-thumb">
         <div class="thumbnail well">
-            <a href="{{ URL::to('gifs', array('id'=>$gif->id)) }}">
-                <img class="img" src="{{{URL::to($gif->thumb)}}}" data-thumb-src="{{{URL::to($gif->thumb)}}}" data-full-src="{{{$gif->url}}}" />
-            </a>
+            {{ $gif->thumbnaillink }}
             <div class="caption">
-                <p><a href="{{ URL::to('gifs', array('id'=>$gif->id)) }}" class="btn btn-success btn-block">Open</a></p>
+                <p>
+                    {{ $gif->openlink }}
+                </p>
                 @if (!Auth::guest())
-                <p><a href="{{ URL::to('gifs/mine', array('id'=>$gif->id)) }}" data-token="{{Session::token()}}" data-method="delete" class="btn btn-success btn-block">Remove From My Giffy</a></p>
+                <p>
+                    {{ $gif->removelink }}
+                </p>
                 @endif
-                <input type="text" class="form-control" value="{{{$gif->url}}}">
+                {{ $gif->imgur }}
             </div>
         </div>
     </div>
