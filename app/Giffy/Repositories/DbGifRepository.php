@@ -141,6 +141,12 @@ class DbGifRepository implements GifRepositoryInterface
         return $thumbPath;
     }
 
+    /**
+     * Clean & normalize imgur urls
+     *
+     * @param  string $url
+     * @return string
+     */
     private function cleanURL(&$url)
     {
         $url = str_replace( ".jpg", ".gif", $url );
