@@ -12,14 +12,14 @@ class CreateGifUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('gif_user', function (Blueprint $table) {
-            $table->increments('id');
+        Schema::create( 'gif_user', function (Blueprint $table) {
+                $table->increments( 'id' );
 
-            $table->integer('gif_id');
-            $table->integer('user_id');
+                $table->integer( 'gif_id' );
+                $table->integer( 'user_id' )->unsigned();
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            } );
     }
 
     /**
@@ -29,7 +29,7 @@ class CreateGifUserTable extends Migration
      */
     public function down()
     {
-        Schema::drop('gif_user');
+        Schema::drop( 'gif_user' );
     }
 
 }

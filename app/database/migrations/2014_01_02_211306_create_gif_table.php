@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
-class CreateTagTable extends Migration
+class CreateGifTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,12 @@ class CreateTagTable extends Migration
      */
     public function up()
     {
-        Schema::create( 'tags', function (Blueprint $table) {
+        Schema::create( 'gifs', function (Blueprint $table) {
                 $table->increments( 'id' );
 
-                $table->string( 'name' );
-                $table->integer( 'user_id' );
+                $table->string( 'url' );
+                $table->string( 'thumb' );
+                $table->string( 'gfy_id' );
 
                 $table->timestamps();
             } );
@@ -29,7 +30,7 @@ class CreateTagTable extends Migration
      */
     public function down()
     {
-        Schema::drop( 'tags' );
+        Schema::drop( 'gifs' );
     }
 
 }
