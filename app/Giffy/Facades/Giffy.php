@@ -22,4 +22,9 @@ class Giffy
         return false;
     }
 
+    public function thumb($image)
+    {
+        return '/thumbs/' . $image;
+    }
+
 }

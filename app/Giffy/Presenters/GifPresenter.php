@@ -1,6 +1,6 @@
 <?php namespace Giffy\Presenters;
 
-use HTML, URL, Form, Session, Auth;
+use HTML, URL, Form, Session, Auth, Giffy;
 
 class GifPresenter extends \Robbo\Presenter\Presenter
 {
@@ -11,7 +11,7 @@ class GifPresenter extends \Robbo\Presenter\Presenter
 
     public function presentThumbnail()
     {
-        return HTML::image( $this->thumb, 'Gif on Giffy', array( 'class'=>'img' ) );
+        return HTML::image( Giffy::thumb($this->thumb), 'Gif on Giffy', array( 'class'=>'img' ) );
     }
 
     public function presentThumbnailLink()

@@ -1,6 +1,6 @@
 <?php namespace Giffy\Controllers\Api;
 
-use Auth;
+use Auth, Giffy;
 use Giffy\Repositories\GifRepositoryInterface;
 use Illuminate\Support\Facades\URL;
 
@@ -34,7 +34,7 @@ class ApiGifController extends ApiController
     {
         $gifs = $this->gifs->apiFetch( $limit, $offset );
         foreach ($gifs as $gif) {
-            $gif->thumb = URL::to( $gif->thumb );
+            $gif->thumb = URL::to( Giffy::thumb( $gif->thumb ) );
         }
 
         return $this->response( 'gifs', $gifs->toArray(), 200, true );
@@ -52,7 +52,7 @@ class ApiGifController extends ApiController
 
         $gifs = Auth::user()->gifs()->get( array( 'gifs.id', 'url', 'thumb' ) );
         foreach ($gifs as $gif) {
-            $gif->thumb = URL::to( $gif->thumb );
+            $gif->thumb = URL::to( Giffy::thumb( $gif->thumb ) );
             unset( $gif->pivot );
         }
 
@@ -74,7 +74,7 @@ class ApiGifController extends ApiController
 
         foreach ($gifs as &$gif) {
             unset( $gif['created_at'], $gif['updated_at'] );
-            $gif['thumb'] = URL::to( $gif['thumb'] );
+            $gif['thumb'] = URL::to( Giffy::thumb( $gif['thumb'] ) );
         }
         $results = [];
         $results['total'] = $total;

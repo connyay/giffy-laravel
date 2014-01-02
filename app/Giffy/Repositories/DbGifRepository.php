@@ -135,10 +135,9 @@ class DbGifRepository implements GifRepositoryInterface
     {
         $parsedURL = parse_url( $url );
         $fileName = $parsedURL["path"];
-        $thumbPath = '/thumbs' . $fileName;
         Thumb::create( $url )->make( 'resize', array( 150, 150, 'adaptive' ) )->save( public_path() . "/thumbs/" );
 
-        return $thumbPath;
+        return $fileName;
     }
 
     /**
