@@ -18,8 +18,8 @@ class CreateUsersTable extends Migration
                 $table->string( 'username', 32 );
                 $table->string( 'password', 64 );
                 $table->boolean( 'super_user' );
-                $table->string( 'reddit_id', 10 );
-                $table->integer( 'twitter_id' );
+                $table->string( 'reddit_id', 10 )->nullable();
+                $table->integer( 'twitter_id' )->nullable();
 
                 $table->timestamps();
             } );
