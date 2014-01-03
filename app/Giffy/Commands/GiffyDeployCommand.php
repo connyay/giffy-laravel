@@ -47,6 +47,7 @@ class GiffyDeployCommand extends Command
         'cd '.$config['root'],
         'git checkout -f',
         'git pull -f',
+        'composer dump-autoload',
         'php artisan cache:clear',
         ];
 
