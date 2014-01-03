@@ -1,0 +1,16 @@
+<?php
+return array(
+
+'connections' => array(
+
+        'production' => array(
+            'host'      => 'prod-host',
+            'username'  => 'prod-user',
+            'password'  => 'prod-pass',
+            'key'       => '',
+            'keyphrase' => '',
+            'root'      => 'prod-root',
+        ),
+
+    ),
+);
