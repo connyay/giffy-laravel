@@ -49,6 +49,7 @@ server:
         - vim
         - curl
         - git
+        - memcached
     dot_files:
         -
             bash_aliases: null
