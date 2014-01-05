@@ -5,7 +5,7 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Giffy.co API</title>
       <!-- Bootstrap core CSS -->
-      <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
+      <link href="{{ asset('assets/style.min.css') }}" rel="stylesheet">
       <link href="{{ asset('css/api.css') }}" rel="stylesheet">
    </head>
    <body>
