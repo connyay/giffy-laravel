@@ -40,7 +40,7 @@ class ApiUserController extends ApiController
     public function login()
     {
         $userdata = Input::only( 'username', 'password' );
-        $remember = Input::get( 'remember' );
+        $remember = (bool) Input::get( 'remember' );
         if ( Giffy::attempt( $userdata, $remember ) ) {
             $user = Auth::user();
 
