@@ -56,7 +56,7 @@ server:
 nginx:
     vhosts:
         FaHcL2r5YAD6:
-            server_name: giffy.dev
+            server_name: api.giffy.dev giffy.dev
             www_root: /var/www/giffy.co/public
             listen_port: '80'
             index_files:
