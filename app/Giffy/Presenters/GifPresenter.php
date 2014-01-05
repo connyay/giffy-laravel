@@ -6,6 +6,11 @@ class GifPresenter extends \Robbo\Presenter\Presenter
 {
     public function presentImage()
     {
+
+        if (!is_null($this->gfy_id)) {
+            return '<img class="img gfyitem" alt="Gif on Giffy (from gfycat)" data-id="'.$this->gfy_id.'" />';
+        }
+
         return HTML::image( $this->url, 'Gif on Giffy', array( 'class'=>'img' ) );
     }
 

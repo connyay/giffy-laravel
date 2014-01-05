@@ -17,7 +17,7 @@ class CreateGifTable extends Migration
 
                 $table->string( 'url' );
                 $table->string( 'thumb' );
-                $table->string( 'gfy_id' );
+                $table->string( 'gfy_id' )->nullable();
 
                 $table->timestamps();
             } );

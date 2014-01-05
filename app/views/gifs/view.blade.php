@@ -9,7 +9,7 @@ Gif
 {{-- Content --}}
 @section('content')
 
-<div class="thumbnail well">
+<div class="well">
     {{ $gif->image }}
     <div class="caption">
         @if ( !Auth::guest() )
@@ -26,6 +26,13 @@ Gif
 
 @section('scripts')
 <script>
+// GFYCAT!
+ (function (d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.src = '//assets.gfycat.com/js/gfyajax-0.517d.js';
+    s.parentNode.insertBefore(g, s);
+}(document, 'script'));
 var tagJson,
 addTag = function (tag) {
     var data = {
