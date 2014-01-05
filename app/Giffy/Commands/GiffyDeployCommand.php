@@ -4,7 +4,7 @@ use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 
-use SSH;
+use App, SSH;
 
 class GiffyDeployCommand extends Command
 {
@@ -43,13 +43,11 @@ class GiffyDeployCommand extends Command
         $remote = $this->argument( 'remote' );
         $config = app()->config['remote.connections.'.$remote];
 
-        $commands = [
-        'cd '.$config['root'],
-        'git checkout -f',
-        'git pull -f',
-        'composer dump-autoload',
-        'php artisan cache:clear',
-        ];
+        if (App::environment() == 'production') {
+            $commands = $this->getProductionCommands($config);
+        } else {
+            $commands = $this->getDevCommands($config);
+        }
 
         if ( $this->option( 'migrate' ) )
             $commands[] = 'php artisan migrate';
@@ -93,4 +91,35 @@ class GiffyDeployCommand extends Command
             array( 'migrate', null, InputOption::VALUE_NONE, 'Execute php artisan migrate.', null ),
         );
     }
+
+    /**
+     * Get the production deploy commands.
+     *
+     * @return array
+     */
+    protected function getProductionCommands($config)
+    {
+        return [
+        'cd '.$config['root'],
+        'git checkout -f',
+        'git pull -f',
+        'composer dump-autoload',
+        'php artisan cache:clear',
+        ];
+    }
+
+    /**
+     * Get the dev deploy commands.
+     *
+     * @return array
+     */
+    protected function getDevCommands($config)
+    {
+        return [
+        'cd '.$config['root'],
+        'php artisan migrate',
+        'php artisan db:seed',
+        ];
+    }
+
 }
